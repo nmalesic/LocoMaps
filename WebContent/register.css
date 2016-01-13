@@ -1,10 +1,12 @@
 @CHARSET "ISO-8859-1";
 
-body, p, legend, label, input {
+body, p, legend, label, input 
+{
 	font: normal 8pt verdana, helvetica, sans-serif;
 }
 
-fieldset {
+fieldset 
+{
 	padding: 10px;
 	border: 1px #0568CD solid;
 }
@@ -14,64 +16,100 @@ legend {
 	color: #0568CD;
 }
 
-form label {
-	float: left;
-	width: 200px;
-	margin: 3px 0px 0px 0px;
+input
+{
+    width: 200px;
 }
 
-form input {
-	margin: 3px 3px 0px 0px;
-	border: 1px #999 solid;
+input.CP
+{
+    width: 50px;
 }
 
-form input.sansLabel {
-	margin-left: 200px;
+input.ville
+{
+    width: 139px;
 }
 
-form .requis {
-	color: #c00;
+.btn
+{
+    width: 100px;
+}
+
+form label 
+{
+    float: left;
+    width: 200px;
+    margin: 3px 0px 0px 0px;
+}
+
+form input 
+{
+    margin: 3px 3px 0px 0px;
+    border: 1px #999 solid;
+}
+
+form input.sansLabel 
+{
+    margin-left: 200px;
+}
+
+form .requis 
+{
+    color: #c00;
+}
+
+a.info_bulle span  
+{  
+    position:absolute;  
+    top:-2000em;  
+    left:-2000em;  
+    width:1px;  
+    height:1px;  
+    overflow:hidden;  
+    background:#DDEEFF; /* Définition du fond, sinon on a le même que notre lien */ 
+    border:1px solid #6699FF; /* Définition des bordures */ 
 }
 
 /* Status */
 .error {
-	color: #900;
+    color: #900;
 }
 
 .info {
-	font-style: italic;
-	color: #E8A22B;
+    font-style: italic;
+    color: #E8A22B;
 }
 
 /* Tables */
 table {
-	border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 tr.pair {
-	background-color: #fff;
+    background-color: #fff;
 }
 
 tr.impair {
-	background-color: #ddd;
+    background-color: #ddd;
 }
 
 th {
-	color: #0568CD;
-	border: 1px solid #0568CD;
-	padding: 5px;
+    color: #0568CD;
+    border: 1px solid #0568CD;
+    padding: 5px;
 }
 
 th.action {
-	border: 1px solid #900;
-	color: #900;
+    border: 1px solid #900;
+    color: #900;
 }
 
 td {
-	border: 1px solid #ddd;
-	padding: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
 }
 
 td.action {
-	text-align: center;
+    text-align: center;
 }
