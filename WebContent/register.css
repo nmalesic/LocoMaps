@@ -28,7 +28,7 @@ input.CP
 
 input.ville
 {
-    width: 139px;
+    width: 140px;
 }
 
 .btn
@@ -43,7 +43,7 @@ form label
     margin: 3px 0px 0px 0px;
 }
 
-form input 
+form input, select 
 {
     margin: 3px 3px 0px 0px;
     border: 1px #999 solid;
@@ -57,6 +57,12 @@ form input.sansLabel
 form .requis 
 {
     color: #c00;
+}
+
+#checkFumeur
+{
+	width:30px;
+	
 }
 
 a.info_bulle span  
