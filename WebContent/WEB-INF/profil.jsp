@@ -28,9 +28,11 @@
 </td>
 <td width="10%">&nbsp;</td>
 <td width="45%" rowspan="2">
-		<iframe width="550" height="450" frameborder="1" style="border:1px solid black"
+		<fieldset>
+		<legend> Votre itinéraire </legend><iframe width="550" height="450" frameborder="1" style="border:1px solid black"
   		src="https://www.google.com/maps/embed/v1/search?key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&q=64+rue+rostand+labege" 
   		allowfullscreen></iframe>
+  		</fieldset>
  </td>
 </tr>
 <tr>
