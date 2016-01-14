@@ -32,7 +32,7 @@ input.CP
 
 input.ville
 {
-    width: 139px;
+    width: 140px;
 }
 
 .btn
@@ -47,7 +47,7 @@ form label
     margin: 3px 0px 0px 0px;
 }
 
-form input 
+form input, select 
 {
     margin: 3px 3px 0px 0px;
     border: 1px #999 solid;
@@ -61,6 +61,12 @@ form input.sansLabel
 form .requis 
 {
     color: #c00;
+}
+
+#checkFumeur
+{
+	width:30px;
+	
 }
 
 a.info_bulle span  
@@ -117,3 +123,53 @@ td {
 td.action {
     text-align: center;
 }
+
+h1
+{
+  font-size: 96px;
+  text-shadow: -1px -1px #f00, 1px 1px #a00, -3px 0 4px #000;
+  color: #0568CD;
+  padding:16px 0 0 0;
+  margin:16px auto;
+  font-weight:lighter;
+  -moz-box-shadow:none;  
+  -webkit-box-shadow: none;  
+  box-shadow:none;  
+  text-align:center;
+  display:block;
+  min-height:172px;
+  min-width:800;
+  max-height:172px;
+  max-width:800px;  
+}
+
+#tabnav {
+    margin: 0;
+    padding: 0 0 20px 10px;
+    float:right
+    }
+
+#tabnav li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    list-style-type: none;  
+    font-family:verdana, arial,sans-serif;
+    }
+
+#tabnav a:link, #tabnav a:visited {
+    float: left;
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: bold;
+    margin: 0 10px 4px 10px;
+    text-decoration: none;
+    color: #0568CD;
+    }
+
+#tabnav li.active a:link, #tabnav li.active a:visited, #tabnav a:hover {
+    border-bottom: 4px solid #0568CD;
+    padding-bottom: 2px;
+    background: #FFFFFF;
+    color: #0568CD;
+    }

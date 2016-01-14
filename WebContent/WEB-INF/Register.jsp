@@ -17,6 +17,8 @@
                     <input name="nomUtil" value="${form['nomUtil']}"></input><span class="error">${erreurs['nomUtil']}</span></br>
                     <label name="lblPrenomUtil">Prénom :<span class="requis">*</span></label>
                     <input name="prenomUtil" value="${form['prenomUtil']}"></input><span class="error">${erreurs['prenomUtil']}</span></br>
+                    <label name="lblPseudo">Pseudo :<span class="requis">*</span></label>
+                    <input name="pseudo" value="${form['pseudo']}"></input><span class="error">${erreurs['pseudo']}</span></br>
 			        <label name="lblEmail">Adresse email :<span class="requis">*</span></label>
 			        <input type="email" name="email" value="${form['email']}"></input><span class="error">${erreurs['email']}</span></br>
 			        <label name="lblPassword">Mot de passe :<span class="requis">*</span></label>
@@ -29,10 +31,23 @@
                     <label name="lblCPVille">Code postal - Ville :<span class="requis">*</span></label>
                     <input name="CP" class="CP" value="${form['CP']}"></input><span class="error">${erreurs['CP']}</span>
                     <input name="ville" class="ville" value="${form['ville']}"></input><span class="error">${erreurs['ville']}</span></br>
+                    <label name="lblTelephone">N° téléphone :</label>
+                    <input name="telephone" value="${form['telephone']}"></input><span class="error">${erreurs['telephone']}</span></br>
+                    <label name="lblSexe">Sexe :</label>
+                    <Select name="sexe" size="1" value="${form['sexe']}"></input><span class="error">${erreurs['sexe']}</span></br>
+                        <Option>Féminin
+                        <Option>Masculin
+                    </Select></br>
+                    <label name="lblFumeur">Fumeur :</label>
+                    <Select name="fumeur" size="1" value="${form['fumeur']}"></input><span class="error">${erreurs['fumeur']}</span></br>
+                        <Option>Non
+                        <Option>Oui
+                    </Select></br>
+                    
 			    </p>
 			    <p>
 			        <input type="submit" class="btn" name="soumettre" value="Enregistrer"></button>
-                    <!--  <input type="submit" class="btn" name="annuler" value="Annuler"></button>-->
+                    <input type="reset" class="btn" name="annuler" value="Rafraîchir"></button>
 
 			    <p>
 			</form>
