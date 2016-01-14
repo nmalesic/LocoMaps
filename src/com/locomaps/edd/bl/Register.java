@@ -36,6 +36,8 @@ public class Register extends HttpServlet {
 	public static final String FIELD_CP = "CP";
 	public static final String FIELD_VILLE = "ville";
 	public static final String FIELD_TEL = "telephone";
+	public static final String FIELD_SEXE = "sexe";
+	public static final String FIELD_FUMEUR = "fumeur";
 
 	private Map<String, String> form = new HashMap<String, String>();
 	private Map<String, String> erreurs = new HashMap<String, String>();
@@ -213,6 +215,9 @@ public class Register extends HttpServlet {
 			form.put(FIELD_TEL, "");
 		}
 
+		String sexe = request.getParameter(FIELD_SEXE);
+		String fumeur = request.getParameter(FIELD_FUMEUR);
+	
 		if (errorStatus)
 		{
 			actionMessage = "Echec de l'inscription";
@@ -221,7 +226,7 @@ public class Register extends HttpServlet {
 		{
 			// Création de l'utilisateur et transmission à la page jsp
 			User newUser = null;
-			newUser = new User(nomUtil,prenomUtil,email,pwd1,pwd2,adr1,adr2,cp,ville);
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
 			
 			request.setAttribute("newUser", newUser);
 			
