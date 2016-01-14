@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bienvenue sur LOCO MAPS</title>
+<link rel="stylesheet" type="text/css" href="register.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 </head>
 <body>
 
-<fieldset>
-        <ul><a href="#"> Se connecter</a></ul>
-        <ul><a href="#"> S'inscrire</a></ul>
-        
-        <h1> LOCO MAPS</h1>
-</fieldset> 
+    <c:import url="/WEB-INF/menu.jsp" />
+
+	<h1>LOCO MAPS</h1>
+	
+	<%-- <c:import url="/WEB-INF/recherche.jsp" /> --%>
 
 </body>
 </html>
