@@ -226,8 +226,7 @@ public class Register extends HttpServlet {
 		{
 			// Création de l'utilisateur et transmission à la page jsp
 			User newUser = null;
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp);
-			
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);			
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
