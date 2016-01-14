@@ -117,12 +117,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_PSEUDO, errMsg);
-			form.put(FIELD_PSEUDO, pseudo);
+			form.put(FIELD_PSEUDO, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_PSEUDO, "");
+			form.put(FIELD_PSEUDO, pseudo);
 			//if (!errorStatus)
 			//	listName.add(prenomUtil);
 		}
