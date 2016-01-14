@@ -3,7 +3,6 @@ package com.locomaps.edd.bl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Identification
+ * Servlet implementation class WelcomeServlet
  */
-@WebServlet("/identification")
-public class Identification extends HttpServlet {
+@WebServlet("/Welcome")
+public class WelcomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public static String VIEW_PAGES_URL="/WEB-INF/identification.jsp";   
-
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Identification() {
+	public WelcomeServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,24 +28,20 @@ public class Identification extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");  
+		PrintWriter out = response.getWriter();  
 
-		String login = request.getParameter("login");
-		String passwd = request.getParameter("password");
-		
-		if (login.equals("sylvain") ){
-			RequestDispatcher dispat =	request.getRequestDispatcher("/Welcome");
-			dispat.forward(request,response);
-		}
-		else{
-			doGet(request, response);
-		}
-		}
+		out.print("Welcome <b>"+request.getParameter("login") + "</b>");  
 
+	}  
 }
+
