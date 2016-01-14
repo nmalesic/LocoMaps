@@ -10,7 +10,7 @@
 <body>
 <table width="100%" align="center" style="border:none">
 <tr>
-<td width="45%">
+<td width="50%">
 <form>
 <fieldset>
 <legend> Utilisateur </legend>
@@ -26,12 +26,12 @@
 </fieldset>
 </form>
 </td>
-<td width="10%">&nbsp;</td>
-<td width="45%" rowspan="2">
+
+<td width="50%" rowspan="2" align="center">
 		<fieldset>
-		<legend> Votre itinéraire </legend><iframe width="550" height="450" frameborder="1" style="border:1px solid black"
-  		src="https://www.google.com/maps/embed/v1/search?key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&q=64+rue+rostand+labege" 
-  		allowfullscreen></iframe>
+		<legend> Votre itinéraire </legend><iframe width="600" height="450" frameborder="1" style="border:0px"
+src="https://www.google.com/maps/embed/v1/directions?origin=Toulouse&destination=64+rue+rostand+labege&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&waypoints=Ramonville+st+agne" 
+allowfullscreen></iframe>
   		</fieldset>
  </td>
 </tr>
