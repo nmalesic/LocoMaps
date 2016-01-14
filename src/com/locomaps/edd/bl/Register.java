@@ -11,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.locomaps.edd.bl.model.User;
 
 /**
  * Servlet implementation class Register
@@ -32,8 +35,6 @@ public class Register extends HttpServlet {
 	public static final String FIELD_CP = "CP";
 	public static final String FIELD_VILLE = "ville";
 
-	
-	
 	private Map<String, String> form = new HashMap<String, String>();
 	private Map<String, String> erreurs = new HashMap<String, String>();
 	Collection<String> listName = new ArrayList<String>();
@@ -65,8 +66,15 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
+		// Lecture de la liste des utilisateurs de la session
+		HttpSession sessionScope = request.getSession();
+		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
+		if (listeUser == null) {
+			listeUser = new HashMap<String,User>();
+		}
+		sessionScope.setAttribute("listeUser", listeUser);
+
 		form = new HashMap<String, String>();
 		erreurs = new HashMap<String, String>();
 		
@@ -77,12 +85,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_NOM_UTIL, errMsg);
-			form.put(FIELD_NOM_UTIL, nomUtil);
+			form.put(FIELD_NOM_UTIL, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_NOM_UTIL, "");
+			form.put(FIELD_NOM_UTIL, nomUtil);
 			//if (!errorStatus)
 			//	listName.add(nomUtil);
 		}
@@ -92,12 +100,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_PRENOM_UTIL, errMsg);
-			form.put(FIELD_PRENOM_UTIL, prenomUtil);
+			form.put(FIELD_PRENOM_UTIL, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_PRENOM_UTIL, "");
+			form.put(FIELD_PRENOM_UTIL, prenomUtil);
 			//if (!errorStatus)
 			//	listName.add(prenomUtil);
 		}
@@ -107,12 +115,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_EMAIL, errMsg);
-			form.put(FIELD_EMAIL, email);
+			form.put(FIELD_EMAIL, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_EMAIL, "");
+			form.put(FIELD_EMAIL, email);
 		}
 
 		String pwd1 = request.getParameter(FIELD_PWD1);
@@ -121,14 +129,14 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_PWD1, errMsg);
-			form.put(FIELD_PWD1, pwd1);
-			form.put(FIELD_PWD2, pwd2);
+			form.put(FIELD_PWD1, "");
+			form.put(FIELD_PWD2, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_PWD1, "");
-			form.put(FIELD_PWD2, "");
+			form.put(FIELD_PWD1, pwd1);
+			form.put(FIELD_PWD2, pwd2);
 		}
 		
 		String adr1 = request.getParameter(FIELD_ADR1);
@@ -137,13 +145,16 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_ADR1, errMsg);
-			form.put(FIELD_ADR1, adr1);
+			form.put(FIELD_ADR1, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_ADR1, "");
+			form.put(FIELD_ADR1, adr1);
 		}
+		
+		String adr2 = request.getParameter(FIELD_ADR2);
+
 		
 		String cp = request.getParameter(FIELD_CP);
 
@@ -151,12 +162,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_CP, errMsg);
-			form.put(FIELD_CP, cp);
+			form.put(FIELD_CP, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_CP, "");
+			form.put(FIELD_CP, cp);
 		}
 
 		String ville = request.getParameter(FIELD_VILLE);
@@ -165,12 +176,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_VILLE, errMsg);
-			form.put(FIELD_VILLE, ville);
+			form.put(FIELD_VILLE, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_VILLE, "");
+			form.put(FIELD_VILLE, ville);
 		}
 		
 		if (errorStatus)
@@ -179,11 +190,31 @@ public class Register extends HttpServlet {
 		}
 		else
 		{
-			actionMessage = "Succès de l'inscription";
+			// Création de l'utilisateur et transmission à la page jsp
+			User newUser = null;
+			newUser = new User(nomUtil,prenomUtil,email,pwd1,pwd2,adr1,adr2,cp,ville);
 			
-			//newUser = new User(util, email, pwd1);
+			request.setAttribute("newUser", newUser);
 			
-			//request.setAttribute("newUser", newUser);
+			// Ajout du nouvel utilisateur dans la session
+			User UserSession = listeUser.get(email);
+			if (UserSession == null){
+				// Ajout du nouvel utilisateur dans la session
+				listeUser.put(email,newUser);
+				// Enregistrer le statut de l'action
+				actionMessage = "Succès de l'inscription";
+				errorStatus = false;
+				
+			} else {
+				// L'utilisateur existe déjà dans la session
+				// Enregistrer le statut de l'action
+				actionMessage = "Echec de l'inscription";
+				errorStatus = true;
+				errMsg = "L'email est déjà utilisé";
+				erreurs.put(FIELD_EMAIL, errMsg);
+			}
+
+			
 		}
 	
 		request.setAttribute("form", form);
