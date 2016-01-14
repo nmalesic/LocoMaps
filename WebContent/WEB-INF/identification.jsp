@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form method="POST" action="identification">
+<form method="POST">
         <fieldset>
             <legend>Identification</legend>
             

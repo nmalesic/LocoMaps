@@ -72,12 +72,14 @@ public class Identification extends HttpServlet {
 
 			if (passwd.equals(UserSession.getPassword())){
 				sessionScope.setAttribute("UserSession", UserSession);
-				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-				dispat.forward(request,response);
+				response.sendRedirect("accueil");
+				/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+				dispat.forward(request,response);*/
 			} else {
 				// Le mot de passe est incorrect
-			}
 				doGet(request, response);
+			}
+
 			}
 		}
 
