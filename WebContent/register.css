@@ -9,6 +9,9 @@ fieldset
 {
 	padding: 10px;
 	border: 1px #0568CD solid;
+	-moz-border-radius:15px;  
+	border-radius: 15px;  
+	-webkit-border-radius: 15px; 
 }
 
 legend {
@@ -19,6 +22,7 @@ legend {
 input
 {
     width: 200px;
+    border-radius: 5px;
 }
 
 input.CP
