@@ -24,6 +24,7 @@ public class Register extends HttpServlet {
        
 	public static final String FIELD_NOM_UTIL = "nomUtil";
 	public static final String FIELD_PRENOM_UTIL = "prenomUtil";
+	public static final String FIELD_PSEUDO = "pseudo";
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "password";
 	public static final String FIELD_PWD2 = "confirmPassword";
@@ -31,6 +32,7 @@ public class Register extends HttpServlet {
 	public static final String FIELD_ADR2 = "adresse2";
 	public static final String FIELD_CP = "CP";
 	public static final String FIELD_VILLE = "ville";
+	public static final String FIELD_TEL = "telephone";
 
 	
 	
@@ -102,6 +104,21 @@ public class Register extends HttpServlet {
 			//	listName.add(prenomUtil);
 		}
 		
+		String pseudo = request.getParameter(FIELD_PSEUDO);
+		errMsg = validateInfo(pseudo,3);
+		if (errMsg !=null)
+		{
+			erreurs.put(FIELD_PSEUDO, errMsg);
+			form.put(FIELD_PSEUDO, pseudo);
+			errorStatus = true;
+		}
+		else
+		{
+			form.put(FIELD_PSEUDO, "");
+			//if (!errorStatus)
+			//	listName.add(prenomUtil);
+		}
+
 		String email = request.getParameter(FIELD_EMAIL);
 		errMsg = validateEmail(email);
 		if (errMsg !=null)
@@ -133,7 +150,7 @@ public class Register extends HttpServlet {
 		
 		String adr1 = request.getParameter(FIELD_ADR1);
 
-		errMsg = validateInfo(adr1,3);
+		errMsg = validateInfo(adr1,4);
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_ADR1, errMsg);
@@ -147,7 +164,7 @@ public class Register extends HttpServlet {
 		
 		String cp = request.getParameter(FIELD_CP);
 
-		errMsg = validateInfo(cp,4);
+		errMsg = validateInfo(cp,5);
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_CP, errMsg);
@@ -160,8 +177,7 @@ public class Register extends HttpServlet {
 		}
 
 		String ville = request.getParameter(FIELD_VILLE);
-
-		errMsg = validateInfo(ville,5);
+		errMsg = validateInfo(ville,6);
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_VILLE, errMsg);
@@ -173,6 +189,19 @@ public class Register extends HttpServlet {
 			form.put(FIELD_VILLE, "");
 		}
 		
+		String tel = request.getParameter(FIELD_TEL);
+		errMsg = validateTel(tel);
+		if (errMsg !=null)
+		{
+			erreurs.put(FIELD_TEL, errMsg);
+			form.put(FIELD_TEL, tel);
+			errorStatus = true;
+		}
+		else
+		{
+			form.put(FIELD_TEL, "");
+		}
+
 		if (errorStatus)
 		{
 			actionMessage = "Echec de l'inscription";
@@ -204,13 +233,11 @@ public class Register extends HttpServlet {
 			if ( !mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
 			{
 				err = "Veuillez saisir une adresse mail valide";
-				//throw new Exception("Veuillez saisir une adresse mail valide");
 			}
 		}
 		else 
 		{
 			err = "L'adresse mail est obligatoire";
-			//throw new Exception("L'adresse mail est	obligatoire");
 		}
 		
 		return err;
@@ -221,21 +248,18 @@ public class Register extends HttpServlet {
 		String err = null;
 		if (pwd1 == null)
 		{
-			//throw new Exception("Le mot de passe est obligatoire");
 			err = "Le mot de passe est obligatoire";
 		}
 		else
 		{
 			if (pwd1.length() < 6)
 			{
-				//throw new Exception("Le mot de passe doit contenir au minimum 8 caractères");
 				err = "Le mot de passe doit contenir au minimum 8 caractères";
 			}
 			
 			
 			if (!pwd1.equals(pwd2))
 			{
-				//throw new Exception("Les mots de passes ne sont pas identiques");
 				err = "Les mots de passes ne sont pas identiques";
 			}
 		}
@@ -257,12 +281,15 @@ public class Register extends HttpServlet {
 					err = "Le prénom est obligatoire";
 					break;
 				case 3:
-					err = "L'adresse est obligatoire";
+					err = "Le pseudo est obligatoire";
 					break;
 				case 4:
-					err = "Le code postal est obligatoire";
+					err = "L'adresse est obligatoire";
 					break;
 				case 5:
+					err = "Le code postal est obligatoire";
+					break;
+				case 6:
 					err = "La ville est obligatoire";
 					break;
 			}		
@@ -271,4 +298,20 @@ public class Register extends HttpServlet {
 		return err;
 	}
 
+	private String validateTel(String tel)
+	{
+		String err = null;
+		if ( tel != null && tel.trim().length() != 0 ) 
+		{
+			//^(?:0|\+33)[1-9](?:([\/ -.]?)[0-9]{2})(?:\1[0-9]{2}){3}$
+
+			if ( !tel.matches( "^(0|\\+33)[1-9][0-9]{8}$"))
+			{
+				err = "Veuillez saisir un numéro de téléphone valide";
+			}
+		}
+		
+		return err;
+	}
+	
 }
