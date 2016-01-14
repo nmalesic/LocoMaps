@@ -2,6 +2,7 @@ package com.locomaps.edd.bl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.locomaps.edd.bl.model.User;
 
 /**
  * Servlet implementation class Identification
@@ -40,17 +44,35 @@ public class Identification extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String login = request.getParameter("login");
+		// Lecture de la liste des utilisateurs de la session
+		HttpSession sessionScope = request.getSession();
+		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
+		if (listeUser == null) {
+			listeUser = new HashMap<String,User>();
+		}
+		sessionScope.setAttribute("listeUser", listeUser);
+
+		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
+
+		User UserSession = listeUser.get(email);
+		if (UserSession == null){
+			// L'utilisateur n'existe pas dans la session
+			doGet(request, response);
+			
+		} else {
+			// L'utilisateur existe dans la session
+			// Test du password
+			if (passwd.equals(UserSession.getPassword())){
+				RequestDispatcher dispat =	request.getRequestDispatcher("/Welcome");
+				dispat.forward(request,response);
+			} else {
+				// Le mot de passe est incorrect
+			}
+				doGet(request, response);
+			}
+		}
+
 		
-		if (login.equals("sylvain") ){
-			System.out.println("hey");
-			RequestDispatcher dispat =	request.getRequestDispatcher("Welcome");
-			dispat.forward(request,response);
-		}
-		else{
-			response.sendRedirect("/identification");
-		}
-		}
 
 }
