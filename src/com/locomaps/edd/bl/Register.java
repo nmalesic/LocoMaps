@@ -75,10 +75,6 @@ public class Register extends HttpServlet {
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
-		/*HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
-		if (listeUser == null) {
-			listeUser = new HashMap<String,User>();
-		}*/
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		form = new HashMap<String, String>();
@@ -97,8 +93,6 @@ public class Register extends HttpServlet {
 		else
 		{
 			form.put(FIELD_NOM_UTIL, nomUtil);
-			//if (!errorStatus)
-			//	listName.add(nomUtil);
 		}
 	
 		String prenomUtil = request.getParameter(FIELD_PRENOM_UTIL);
@@ -112,8 +106,6 @@ public class Register extends HttpServlet {
 		else
 		{
 			form.put(FIELD_PRENOM_UTIL, prenomUtil);
-			//if (!errorStatus)
-			//	listName.add(prenomUtil);
 		}
 		
 		String pseudo = request.getParameter(FIELD_PSEUDO);
@@ -127,8 +119,6 @@ public class Register extends HttpServlet {
 		else
 		{
 			form.put(FIELD_PSEUDO, pseudo);
-			//if (!errorStatus)
-			//	listName.add(prenomUtil);
 		}
 
 		String email = request.getParameter(FIELD_EMAIL);
@@ -228,7 +218,6 @@ public class Register extends HttpServlet {
 			request.setAttribute("actionMessage", actionMessage);
 			request.setAttribute("errorStatus", errorStatus);
 
-			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
 			doGet(request, response);
 		}
 		else
@@ -239,22 +228,19 @@ public class Register extends HttpServlet {
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
-			//User UserSession = listeUser.get(email);
 			User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
 			if (UserSession == null){
 				// Ajout du nouvel utilisateur dans la session
 				listeUser.put(email,newUser);
+				
 				// Enregistrer le statut de l'action
 				actionMessage = "Succès de l'inscription";
 				errorStatus = false;
 				
 				request.setAttribute("errorStatus", errorStatus);
-
 				
 				sessionScope.setAttribute("UserSession", UserSession);
 				response.sendRedirect("identification");
-				/*RequestDispatcher dispat =	request.getRequestDispatcher("/identification");
-				dispat.forward(request,response);*/
 				
 			} else {
 				// L'utilisateur existe déjà dans la session
@@ -269,13 +255,11 @@ public class Register extends HttpServlet {
 				request.setAttribute("actionMessage", actionMessage);
 				request.setAttribute("errorStatus", errorStatus);
 
-				//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
 				doGet(request, response);
 			}
-
 			
 		}
-	
+
 
 	}
 	
