@@ -65,7 +65,7 @@ public class Profil extends HttpServlet {
 			sb.append("&").append(waypoint);
 			}
 		sb.append(" allowfullscreen></iframe>\"");
-				
+		
 		return sb.toString();
 	}
 

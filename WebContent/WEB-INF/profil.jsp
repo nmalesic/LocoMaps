@@ -3,7 +3,7 @@
 <table width="100%" align="center" style="border:none">
 <tr>
 <td width="50%">
-<form>
+<form method=POST>
 <fieldset>
 <legend> Utilisateur </legend>
 
