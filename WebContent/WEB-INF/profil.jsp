@@ -3,7 +3,7 @@
 <table width="100%" align="center" style="border:none">
 <tr>
 <td width="50%">
-<form method=POST>
+<form>
 <fieldset>
 <legend> Utilisateur </legend>
 
@@ -30,7 +30,7 @@ allowfullscreen></iframe>
 </tr>
 <tr>
 	<td>
-		<form>
+		<form method="POST">
 		<fieldset>
 		<legend> Itineraire </legend>
 		<label for="origin">Départ :</label><input type="text" id="origin" name="origin" placeholder="Votre Adresse de départ"><Br>
