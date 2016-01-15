@@ -56,6 +56,12 @@ public class Identification extends HttpServlet {
 		String passwd = request.getParameter("password");
 
 		User UserSession = listeUser.get(email);
+		
+		
+//		RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+//		dispat.forward(request,response);
+
+
 		if (UserSession == null){
 			// L'utilisateur n'existe pas dans la session
 			doGet(request, response);
@@ -63,13 +69,17 @@ public class Identification extends HttpServlet {
 		} else {
 			// L'utilisateur existe dans la session
 			// Test du password
+
 			if (passwd.equals(UserSession.getPassword())){
-				RequestDispatcher dispat =	request.getRequestDispatcher("/Welcome");
-				dispat.forward(request,response);
+				sessionScope.setAttribute("UserSession", UserSession);
+				response.sendRedirect("accueil");
+				/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+				dispat.forward(request,response);*/
 			} else {
 				// Le mot de passe est incorrect
-			}
 				doGet(request, response);
+			}
+
 			}
 		}
 

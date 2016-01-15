@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,8 @@ public class Register extends HttpServlet {
 	public static final String FIELD_CP = "CP";
 	public static final String FIELD_VILLE = "ville";
 	public static final String FIELD_TEL = "telephone";
+	public static final String FIELD_SEXE = "sexe";
+	public static final String FIELD_FUMEUR = "fumeur";
 
 	private Map<String, String> form = new HashMap<String, String>();
 	private Map<String, String> erreurs = new HashMap<String, String>();
@@ -117,12 +120,12 @@ public class Register extends HttpServlet {
 		if (errMsg !=null)
 		{
 			erreurs.put(FIELD_PSEUDO, errMsg);
-			form.put(FIELD_PSEUDO, pseudo);
+			form.put(FIELD_PSEUDO, "");
 			errorStatus = true;
 		}
 		else
 		{
-			form.put(FIELD_PSEUDO, "");
+			form.put(FIELD_PSEUDO, pseudo);
 			//if (!errorStatus)
 			//	listName.add(prenomUtil);
 		}
@@ -213,16 +216,25 @@ public class Register extends HttpServlet {
 			form.put(FIELD_TEL, "");
 		}
 
+		String sexe = request.getParameter(FIELD_SEXE);
+		String fumeur = request.getParameter(FIELD_FUMEUR);
+	
 		if (errorStatus)
 		{
 			actionMessage = "Echec de l'inscription";
+			request.setAttribute("form", form);
+			request.setAttribute("erreurs", erreurs);
+			request.setAttribute("actionMessage", actionMessage);
+			request.setAttribute("errorStatus", errorStatus);
+
+			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
+			doGet(request, response);
 		}
 		else
 		{
 			// Création de l'utilisateur et transmission à la page jsp
 			User newUser = null;
-			newUser = new User(nomUtil,prenomUtil,email,pwd1,pwd2,adr1,adr2,cp,ville);
-			
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);			
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
@@ -234,6 +246,11 @@ public class Register extends HttpServlet {
 				actionMessage = "Succès de l'inscription";
 				errorStatus = false;
 				
+				sessionScope.setAttribute("UserSession", UserSession);
+				response.sendRedirect("identification");
+				/*RequestDispatcher dispat =	request.getRequestDispatcher("/identification");
+				dispat.forward(request,response);*/
+				
 			} else {
 				// L'utilisateur existe déjà dans la session
 				// Enregistrer le statut de l'action
@@ -241,18 +258,19 @@ public class Register extends HttpServlet {
 				errorStatus = true;
 				errMsg = "L'email est déjà utilisé";
 				erreurs.put(FIELD_EMAIL, errMsg);
+
+				request.setAttribute("form", form);
+				request.setAttribute("erreurs", erreurs);
+				request.setAttribute("actionMessage", actionMessage);
+				request.setAttribute("errorStatus", errorStatus);
+
+				//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
+				doGet(request, response);
 			}
 
 			
 		}
 	
-		request.setAttribute("form", form);
-		request.setAttribute("erreurs", erreurs);
-		request.setAttribute("actionMessage", actionMessage);
-		request.setAttribute("errorStatus", errorStatus);
-
-		//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
-		doGet(request, response);
 
 	}
 	

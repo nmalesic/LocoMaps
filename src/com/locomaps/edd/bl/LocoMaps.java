@@ -1,6 +1,7 @@
 package com.locomaps.edd.bl;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.locomaps.edd.bl.model.User;
 
 /**
  * Servlet implementation class Identification
@@ -39,16 +43,46 @@ public class LocoMaps extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String login = request.getParameter("login");
+		String login = request.getParameter("email");
 		String passwd = request.getParameter("password");
 		
-		if (login.equals("sylvain") ){
-			RequestDispatcher dispat =	request.getRequestDispatcher("/Welcome");
-			dispat.forward(request,response);
-		}
-		else{
-			doGet(request, response);
-		}
+		User UserSession = null;
+		
+		HttpSession sessionScope = request.getSession();
+		
+		sessionScope.getAttribute("UserSession");
+		
+		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+		dispat.forward(request,response);
+		*/
+		
+//		if (login.equals("sylvain") ){
+//			RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+//			dispat.forward(request,response);
+//		}
+//		else{
+//			doGet(request, response);
+//		}
+		
+		
+		
+//		if (UserSession == null){
+//			// L'utilisateur n'existe pas dans la session
+//			doGet(request, response);
+//			
+//		} else {
+//			// L'utilisateur existe dans la session
+//			// Test du password
+//
+//			if (passwd.equals(UserSession.getPassword())){
+//				sessionScope.setAttribute("UserSession", UserSession);
+//				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+//				dispat.forward(request,response);
+//			} else {
+//				// Le mot de passe est incorrect
+//			}
+//				doGet(request, response);
+//			}
 		}
 
 }

@@ -12,10 +12,10 @@
 
 <form method="POST">
         <fieldset>
-            <legend>Inscription</legend>
+            <legend>Identification</legend>
             
-		     Login : <input required name="login" size=20 maxlength="20\" />
-		     Password : <input type="password" name="password\" size=20 maxlength="20" />
+		     Login : <input required name="email" size=20 maxlength="20\" />
+		     Password : <input type="password" name="password" size=20 maxlength="20" />
 		     <INPUT	type="SUBMIT" name="submit" value="Soumettre">
 		     <INPUT type="RESET" name="reset" value="Rafraichir"> <br>
 		
