@@ -61,10 +61,10 @@ public class Profil extends HttpServlet {
 		sb.append("&destination=");
 		sb.append(destination);
 		sb.append("&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM");
-		if (waypoint != null || !waypoint.equals("")){
+		/*if (waypoint != null || !waypoint.equals("")){
 			sb.append("&").append(waypoint);
-			}
-		sb.append(" allowfullscreen></iframe>\"");
+			}*/
+		sb.append("\" allowfullscreen></iframe>\"");
 		
 		return sb.toString();
 	}

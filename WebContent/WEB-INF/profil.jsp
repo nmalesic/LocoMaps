@@ -22,9 +22,9 @@
 
 <td width="50%" rowspan="2" align="center">
 		<fieldset>
-		<legend> Votre carte </legend><iframe width="600" height="450" frameborder="1" style="border:0px"
-src="https://www.google.com/maps/embed/v1/directions?origin=Toulouse&destination=64+rue+rostand+labege&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&waypoints=Ramonville+st+agne" 
-allowfullscreen></iframe>
+		<legend> Votre carte </legend>
+${frame}
+
   		</fieldset>
  </td>
 </tr>
@@ -44,6 +44,10 @@ allowfullscreen></iframe>
 		</form>
 	</td>
 <td></td>
-<%= ("64, rue jean Rostand").replaceAll("\\s+","+")%>
 </tr>
 </table>
+
+		<!-- <iframe width="600" height="450" frameborder="1" style="border:0px"
+src="https://www.google.com/maps/embed/v1/directions?origin=Toulouse&destination=64+rue+rostand+labege&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&waypoints=Ramonville+st+agne" 
+allowfullscreen></iframe>
+ -->

@@ -31,11 +31,14 @@ public class MapsUtils {
 		return "64+rue+jean+Rostand";
 	}
 	
+// <iframe width="600" height="450" frameborder="1" style="border:0px"
+//src="https://www.google.com/maps/embed/v1/directions?origin=Toulouse&destination=64+rue+rostand+labege&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&waypoints=Ramonville+st+agne" 
+// allowfullscreen></iframe>
+
 	
 	
 	
-	
-public String composeItineraire(String origin, String destination, String waypoint){
+public static String composeItineraire(String origin, String destination, String waypoint){
 		
 		StringBuilder sb = new StringBuilder("");
 		sb.append("<iframe width=\"600\" height=\"450\" frameborder=\"1\" style=\"border:0px\" src=\"");
@@ -44,10 +47,10 @@ public String composeItineraire(String origin, String destination, String waypoi
 		sb.append("&destination=");
 		sb.append(destination);
 		sb.append("&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM");
-		if (waypoint != null || !waypoint.equals("")){
+		/*if (waypoint != null || !waypoint.equals(" ")){
 			sb.append("&").append(waypoint);
-			}
-		sb.append(" allowfullscreen></iframe>\"");
+			}*/
+		sb.append("\" allowfullscreen></iframe>");
 		
 		return sb.toString();
 	}
