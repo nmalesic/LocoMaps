@@ -58,7 +58,7 @@ public class GestionSession {
 	 * @param sessionScope
 	 * @return
 	 */
-	static User getUserSession(HttpSession sessionScope) {
+	public static User getUserSession(HttpSession sessionScope) {
 		//User UserSession = listeUser.get(email);
 		//User UserSession = null;
 		return (User)sessionScope.getAttribute("UserSession");
