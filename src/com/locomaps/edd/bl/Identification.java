@@ -46,16 +46,18 @@ public class Identification extends HttpServlet {
 
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
-		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
+		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
+		/*HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
 		if (listeUser == null) {
 			listeUser = new HashMap<String,User>();
-		}
+		}*/
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
-		User UserSession = listeUser.get(email);
+		User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+		//User UserSession = listeUser.get(email);
 		
 		
 //		RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
