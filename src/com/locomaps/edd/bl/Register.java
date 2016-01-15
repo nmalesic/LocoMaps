@@ -246,6 +246,9 @@ public class Register extends HttpServlet {
 				actionMessage = "Succès de l'inscription";
 				errorStatus = false;
 				
+				request.setAttribute("errorStatus", errorStatus);
+
+				
 				sessionScope.setAttribute("UserSession", UserSession);
 				response.sendRedirect("identification");
 				/*RequestDispatcher dispat =	request.getRequestDispatcher("/identification");
