@@ -16,7 +16,7 @@
         <fieldset>
             <legend>Identification</legend>
             
-		     Login : <input required name="email" size=20 maxlength="20\" />
+		     Login : <input required name="email" size=50 maxlength="50\" />
              Password : <input type="password" name="password" size=20 maxlength="20" />
 		     <INPUT	type="SUBMIT" class="btn" name="submit" value="Soumettre">
 		     <INPUT type="RESET" class="btn" name="reset" value="Rafraichir"> <br>
