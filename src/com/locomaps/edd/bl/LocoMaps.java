@@ -46,11 +46,12 @@ public class LocoMaps extends HttpServlet {
 		String login = request.getParameter("email");
 		String passwd = request.getParameter("password");
 		
-		User UserSession = null;
+		//User UserSession = null;
 		
 		HttpSession sessionScope = request.getSession();
 		
-		sessionScope.getAttribute("UserSession");
+		User UserSession = GestionSession.getUserSession(sessionScope);
+		//sessionScope.getAttribute("UserSession");
 		
 		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 		dispat.forward(request,response);

@@ -74,10 +74,11 @@ public class Register extends HttpServlet {
 		
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
-		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
+		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
+		/*HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
 		if (listeUser == null) {
 			listeUser = new HashMap<String,User>();
-		}
+		}*/
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		form = new HashMap<String, String>();
@@ -238,13 +239,17 @@ public class Register extends HttpServlet {
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
-			User UserSession = listeUser.get(email);
+			//User UserSession = listeUser.get(email);
+			User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
 			if (UserSession == null){
 				// Ajout du nouvel utilisateur dans la session
 				listeUser.put(email,newUser);
 				// Enregistrer le statut de l'action
 				actionMessage = "Succès de l'inscription";
 				errorStatus = false;
+				
+				request.setAttribute("errorStatus", errorStatus);
+
 				
 				sessionScope.setAttribute("UserSession", UserSession);
 				response.sendRedirect("identification");

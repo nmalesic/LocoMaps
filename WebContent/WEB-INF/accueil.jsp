@@ -13,7 +13,6 @@
     <c:import url="/WEB-INF/banniere.jsp" /></br>
     <c:import url="/WEB-INF/menu.jsp" /></br>
 
-	<!--<h1>LOCO MAPS</h1>-->
 	
 	<%-- <c:import url="/WEB-INF/recherche.jsp" /> --%>
 

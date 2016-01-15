@@ -1,5 +1,10 @@
-    <c:import url="/WEB-INF/banniere.jsp" /></br>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
 <fieldset>
+
+    Vous etes connecté en tant que     ${UserSession.pseudo}
+
+
 	<div id="tabnav">
 
     <li class="active">
