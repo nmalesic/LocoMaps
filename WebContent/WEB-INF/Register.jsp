@@ -10,6 +10,7 @@
 <title>Formulaire d'inscription</title>
 </head>
 <body>
+    <c:import url="/WEB-INF/banniere.jsp" /></br>
 	<fieldset>
 	    <legend>Formulaire Inscription</legend>
 			<form method="POST" action="Register">

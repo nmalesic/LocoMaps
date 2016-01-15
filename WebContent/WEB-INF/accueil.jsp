@@ -10,10 +10,10 @@
 
 </head>
 <body>
+    <c:import url="/WEB-INF/banniere.jsp" /></br>
+    <c:import url="/WEB-INF/menu.jsp" /></br>
 
-    <c:import url="/WEB-INF/menu.jsp" />
-
-	<h1>LOCO MAPS</h1>
+	<!--<h1>LOCO MAPS</h1>-->
 	
 	<%-- <c:import url="/WEB-INF/recherche.jsp" /> --%>
 
