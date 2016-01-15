@@ -47,22 +47,12 @@ public class Identification extends HttpServlet {
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
-		/*HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
-		if (listeUser == null) {
-			listeUser = new HashMap<String,User>();
-		}*/
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
 		User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
-		//User UserSession = listeUser.get(email);
-		
-		
-//		RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-//		dispat.forward(request,response);
-
 
 		if (UserSession == null){
 			// L'utilisateur n'existe pas dans la session
@@ -75,8 +65,7 @@ public class Identification extends HttpServlet {
 			if (passwd.equals(UserSession.getPassword())){
 				sessionScope.setAttribute("UserSession", UserSession);
 				response.sendRedirect("accueil");
-				/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-				dispat.forward(request,response);*/
+
 			} else {
 				// Le mot de passe est incorrect
 				doGet(request, response);

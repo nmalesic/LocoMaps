@@ -47,17 +47,20 @@ public class LocoMaps extends HttpServlet {
 		String login = request.getParameter("email");
 		String passwd = request.getParameter("password");
 		
+
 		String origin = request.getParameter("origin");
 		String waypoint = request.getParameter("waypoint1")+"|"+request.getParameter("waypoint2")+"|"+request.getParameter("waypoint3");
 		
 		
 		//User UserSession = null;
 		
+
 		HttpSession sessionScope = request.getSession();
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
 		
 		User UserSession = GestionSession.getUserSession(sessionScope);
+
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 		//sessionScope.getAttribute("UserSession");
 		
@@ -92,6 +95,7 @@ public class LocoMaps extends HttpServlet {
 //			}
 //				doGet(request, response);
 //			}
+
 		}
 
 }

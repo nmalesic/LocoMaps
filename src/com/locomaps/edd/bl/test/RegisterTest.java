@@ -5,13 +5,19 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.locomaps.edd.bl.GestionSession;
 import com.locomaps.edd.bl.Register;
+import com.locomaps.edd.bl.model.User;
 
 public class RegisterTest {
 
@@ -19,6 +25,7 @@ public class RegisterTest {
 	Collection<String> listTest;
 	Collection<String> list2Test;
 	Collection<String> listResult;
+	User user;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -281,6 +288,5 @@ public class RegisterTest {
 				assertEquals(messErr, messRes);
 		}
 	}
-	
 	
 }
