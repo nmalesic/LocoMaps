@@ -29,7 +29,7 @@
 
 <td width="50%" rowspan="2" align="center">
 		<fieldset>
-		<legend> Votre itinéraire </legend><iframe width="600" height="450" frameborder="1" style="border:0px"
+		<legend> Votre carte </legend><iframe width="600" height="450" frameborder="1" style="border:0px"
 src="https://www.google.com/maps/embed/v1/directions?origin=Toulouse&destination=64+rue+rostand+labege&key=AIzaSyDHdpHkRbHmVj4tZ4pt96z7lntPfvQ3naM&waypoints=Ramonville+st+agne" 
 allowfullscreen></iframe>
   		</fieldset>
@@ -45,6 +45,8 @@ allowfullscreen></iframe>
 		<label for="waypoint1">Point de passage :</label><input type="text" id="waypoint1" name="waypoint1" placeholder="ex:Balma"><Br>
 		<label for="waypoint2">Point de passage :</label><input type="text" id="waypoint2" name="waypoint2" placeholder="ex:Castanet-Tolosan"><Br>
 		<label for="waypoint3">Point de passage :</label><input type="text" id="waypoint3" name="waypoint3" placeholder="ex:Berlin (mais c'est plus long!)"><Br>
+		<input type=submit value="chercher" class="sansLabel">
+		
 		</fieldset>
 		</form>
 	</td>
