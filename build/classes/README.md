@@ -1,2 +1,0 @@
-# LocoMaps
-Covoiturage

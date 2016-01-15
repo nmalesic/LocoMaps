@@ -52,8 +52,9 @@ public class LocoMaps extends HttpServlet {
 		
 		sessionScope.getAttribute("UserSession");
 		
-		RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
+		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 		dispat.forward(request,response);
+		*/
 		
 //		if (login.equals("sylvain") ){
 //			RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
