@@ -274,12 +274,12 @@ public class Register extends HttpServlet {
 
 	}
 	
-	private String validateEmail(String mail)
+	public String validateEmail(String mail)
 	{
 		String err = null;
 		if ( mail != null && mail.trim().length() != 0 ) 
 		{
-			if ( !mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
+			if ( !mail.matches( "([A-z0-9]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
 			{
 				err = "Veuillez saisir une adresse mail valide";
 			}
@@ -292,7 +292,7 @@ public class Register extends HttpServlet {
 		return err;
 	}
 	
-	private String validatePwd(String pwd1, String pwd2)
+	public String validatePwd(String pwd1, String pwd2)
 	{
 		String err = null;
 		if (pwd1 == null)
@@ -316,10 +316,10 @@ public class Register extends HttpServlet {
 		return err;
 	}
 	
-	private String validateInfo(String name,int n)
+	public String validateInfo(String name,int n)
 	{
 		String err = null;
-		if (name == null)
+		if (name == null || name.equals(""))
 		{
 			switch (n)
 			{
@@ -347,7 +347,7 @@ public class Register extends HttpServlet {
 		return err;
 	}
 
-	private String validateTel(String tel)
+	public String validateTel(String tel)
 	{
 		String err = null;
 		if ( tel != null && tel.trim().length() != 0 ) 
