@@ -19,7 +19,7 @@ public class GestionSession {
 	 * @param sessionScope
 	 * @return
 	 */
-	static HashMap<String,User> getListUser(HttpSession sessionScope) {
+	public static HashMap<String,User> getListUser(HttpSession sessionScope) {
 		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
 		if (listeUser == null) {
 			listeUser = new HashMap<String,User>();
@@ -40,7 +40,7 @@ public class GestionSession {
 	 * @param email
 	 * @return
 	 */
-	static User getUserSessionbyEmail(HttpSession sessionScope, String email) {
+	public static User getUserSessionbyEmail(HttpSession sessionScope, String email) {
 		HashMap<String,User> listeUser = getListUser(sessionScope);
 		User UserSession = listeUser.get(email);
 		return UserSession;
@@ -58,7 +58,7 @@ public class GestionSession {
 	 * @param sessionScope
 	 * @return
 	 */
-	static User getUserSession(HttpSession sessionScope) {
+	public static User getUserSession(HttpSession sessionScope) {
 		//User UserSession = listeUser.get(email);
 		//User UserSession = null;
 		return (User)sessionScope.getAttribute("UserSession");

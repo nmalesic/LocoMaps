@@ -44,6 +44,6 @@ allowfullscreen></iframe>
 		</form>
 	</td>
 <td></td>
-
+<%= ("64, rue jean Rostand").replaceAll("\\s+","+")%>
 </tr>
 </table>
