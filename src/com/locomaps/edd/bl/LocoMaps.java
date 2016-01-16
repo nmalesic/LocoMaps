@@ -52,17 +52,17 @@ public class LocoMaps extends HttpServlet {
 		String waypoint = request.getParameter("waypoint1")+"|"+request.getParameter("waypoint2")+"|"+request.getParameter("waypoint3");
 		
 		
-		//User UserSession = null;
+		//User userSession = null;
 		
 
 		HttpSession sessionScope = request.getSession();
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
 		
-		User UserSession = GestionSession.getUserSession(sessionScope);
+		User userSession = GestionSession.getUserSession(sessionScope);
 
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
-		//sessionScope.getAttribute("UserSession");
+		//sessionScope.getAttribute("userSession");
 		
 		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 		dispat.forward(request,response);
@@ -78,7 +78,7 @@ public class LocoMaps extends HttpServlet {
 		
 		
 		
-//		if (UserSession == null){
+//		if (userSession == null){
 //			// L'utilisateur n'existe pas dans la session
 //			doGet(request, response);
 //			
@@ -86,8 +86,8 @@ public class LocoMaps extends HttpServlet {
 //			// L'utilisateur existe dans la session
 //			// Test du password
 //
-//			if (passwd.equals(UserSession.getPassword())){
-//				sessionScope.setAttribute("UserSession", UserSession);
+//			if (passwd.equals(userSession.getPassword())){
+//				sessionScope.setAttribute("userSession", userSession);
 //				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 //				dispat.forward(request,response);
 //			} else {

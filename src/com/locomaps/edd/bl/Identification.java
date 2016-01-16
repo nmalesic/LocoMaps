@@ -52,9 +52,9 @@ public class Identification extends HttpServlet {
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
-		User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+		User userSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
 
-		if (UserSession == null){
+		if (userSession == null){
 			// L'utilisateur n'existe pas dans la session
 			doGet(request, response);
 			
@@ -62,8 +62,8 @@ public class Identification extends HttpServlet {
 			// L'utilisateur existe dans la session
 			// Test du password
 
-			if (passwd.equals(UserSession.getPassword())){
-				sessionScope.setAttribute("UserSession", UserSession);
+			if (passwd.equals(userSession.getPassword())){
+				sessionScope.setAttribute("userSession", userSession);
 				response.sendRedirect("accueil");
 
 			} else {

@@ -34,7 +34,7 @@ public class GestionSession {
 	 * Exemple d'utilisation :
 	 * 
 	 * HttpSession sessionScope = request.getSession();
-	 * User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+	 * User userSession = GestionSession.getuserSessionbyEmail(sessionScope, email);
 	 * 
 	 * @param sessionScope
 	 * @param email
@@ -42,8 +42,8 @@ public class GestionSession {
 	 */
 	public static User getUserSessionbyEmail(HttpSession sessionScope, String email) {
 		HashMap<String,User> listeUser = getListUser(sessionScope);
-		User UserSession = listeUser.get(email);
-		return UserSession;
+		User userSession = listeUser.get(email);
+		return userSession;
 	}
 	
 	/**
@@ -53,15 +53,15 @@ public class GestionSession {
 	 * Exemple d'utilisation :
 	 * 
 	 * HttpSession sessionScope = request.getSession();
-	 * User UserSession = GestionSession.getUserSession(sessionScope);
+	 * User userSession = GestionSession.getuserSession(sessionScope);
 	 * 
 	 * @param sessionScope
 	 * @return
 	 */
 	public static User getUserSession(HttpSession sessionScope) {
-		//User UserSession = listeUser.get(email);
-		//User UserSession = null;
-		return (User)sessionScope.getAttribute("UserSession");
-		//return UserSession;
+		//User userSession = listeUser.get(email);
+		//User userSession = null;
+		return (User)sessionScope.getAttribute("userSession");
+		//return userSession;
 	}
 }
