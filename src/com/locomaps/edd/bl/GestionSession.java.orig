@@ -59,9 +59,16 @@ public class GestionSession {
 	 * @return
 	 */
 	public static User getUserSession(HttpSession sessionScope) {
+<<<<<<< HEAD
+		//User UserSession = listeUser.get(email);
+		//User UserSession = null;
+		return (User)sessionScope.getAttribute("UserSession");
+		//return UserSession;
+=======
 		//User userSession = listeUser.get(email);
 		//User userSession = null;
 		return (User)sessionScope.getAttribute("userSession");
 		//return userSession;
+>>>>>>> master
 	}
 }

@@ -52,17 +52,28 @@ public class LocoMaps extends HttpServlet {
 		String waypoint = request.getParameter("waypoint1")+"|"+request.getParameter("waypoint2")+"|"+request.getParameter("waypoint3");
 		
 		
+<<<<<<< HEAD
+		//User UserSession = null;
+=======
 		//User userSession = null;
+>>>>>>> master
 		
 
 		HttpSession sessionScope = request.getSession();
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
 		
+<<<<<<< HEAD
+		User UserSession = GestionSession.getUserSession(sessionScope);
+
+		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
+		//sessionScope.getAttribute("UserSession");
+=======
 		User userSession = GestionSession.getUserSession(sessionScope);
 
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 		//sessionScope.getAttribute("userSession");
+>>>>>>> master
 		
 		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 		dispat.forward(request,response);
@@ -78,43 +89,11 @@ public class LocoMaps extends HttpServlet {
 		
 		
 		
-//		if (userSession == null){
-//			// L'utilisateur n'existe pas dans la session
-//			doGet(request, response);
-//			
-//		} else {
-//			// L'utilisateur existe dans la session
-//			// Test du password
-//
-//			if (passwd.equals(userSession.getPassword())){
-//				sessionScope.setAttribute("userSession", userSession);
-//				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-//				dispat.forward(request,response);
-//			} else {
-//				// Le mot de passe est incorrect
-//			}
-//				doGet(request, response);
-//			}
-
-
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
-		//sessionScope.getAttribute("UserSession");
-		
-		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-		dispat.forward(request,response);
-		*/
-		
-//		if (login.equals("sylvain") ){
-//			RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-//			dispat.forward(request,response);
-//		}
-//		else{
-//			doGet(request, response);
-//		}
-		
-		
-		
+<<<<<<< HEAD
 //		if (UserSession == null){
+=======
+//		if (userSession == null){
+>>>>>>> master
 //			// L'utilisateur n'existe pas dans la session
 //			doGet(request, response);
 //			
@@ -122,8 +101,13 @@ public class LocoMaps extends HttpServlet {
 //			// L'utilisateur existe dans la session
 //			// Test du password
 //
+<<<<<<< HEAD
 //			if (passwd.equals(UserSession.getPassword())){
 //				sessionScope.setAttribute("UserSession", UserSession);
+=======
+//			if (passwd.equals(userSession.getPassword())){
+//				sessionScope.setAttribute("userSession", userSession);
+>>>>>>> master
 //				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
 //				dispat.forward(request,response);
 //			} else {

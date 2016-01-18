@@ -228,8 +228,8 @@ public class Register extends HttpServlet {
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
-			User UserSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
-			if (UserSession == null){
+			User userSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+			if (userSession == null){
 				// Ajout du nouvel utilisateur dans la session
 				listeUser.put(email,newUser);
 				
@@ -239,7 +239,7 @@ public class Register extends HttpServlet {
 				
 				request.setAttribute("errorStatus", errorStatus);
 				
-				sessionScope.setAttribute("UserSession", UserSession);
+				sessionScope.setAttribute("userSession", userSession);
 				response.sendRedirect("identification");
 				
 			} else {

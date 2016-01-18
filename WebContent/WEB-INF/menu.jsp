@@ -2,7 +2,7 @@
  
 <fieldset>
 
-    Vous etes connecté en tant que     ${UserSession.pseudo}
+    Vous etes connecté en tant que     ${userSession.pseudo}
 
 
 	<div id="tabnav">

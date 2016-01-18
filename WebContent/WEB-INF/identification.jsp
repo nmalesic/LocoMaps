@@ -15,12 +15,7 @@
 <c:import url="/WEB-INF/banniere.jsp" /></br>
         <fieldset>
             <legend>Identification</legend>
-            
-<<<<<<< HEAD
-		     Login : <input required name="email" size=50 maxlength="50\" />
-=======
-		     Email : <input required name="email" size=20 maxlength="20\" />
->>>>>>> 99f116f6a96f1da742807f972f7f6e3f3154913c
+		     Email : <input required name="email" size=50 maxlength="50\" />
              Password : <input type="password" name="password" size=20 maxlength="20" />
 		     <INPUT	type="SUBMIT" class="btn" name="submit" value="Soumettre">
 		     <INPUT type="RESET" class="btn" name="reset" value="Rafraichir"> <br>
