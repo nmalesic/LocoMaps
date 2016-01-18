@@ -1,7 +1,7 @@
 package com.locomaps.edd.bl;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
-import com.locomaps.edd.bl.model.Latlng;
+import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
 
@@ -61,20 +62,15 @@ public class LocoMaps extends HttpServlet {
 		String waypoint = request.getParameter("waypoint1")+"|"+request.getParameter("waypoint2")+"|"+request.getParameter("waypoint3");
 
 		
-		String result = request.getParameter("JFM_RESULT");
+		String result = request.getParameter("result");
 		String coords = request.getParameter("coords");
 		String coordslat = request.getParameter("coordslat");
 		String coordslng = request.getParameter("coordslng");
 
-	  	Latlng coordLatlng = null;
+	  	Location coordLatlng = null;
 	  	GoogleGeoCodeResponse gsonCoords = null;
-		
-	   // Récupération uniquement de la coordonnée
-//		  if(coords != null) {
-//			    final GsonBuilder gsonBuilder = new GsonBuilder();
-//			    final Gson gson = gsonBuilder.create();
-//			    coordLatlng = gson.fromJson( coords, Latlng.class);
-//		  }
+	  	Adresse2D adressOrigin = null;
+	  	ArrayList<User> listUserDansRayon = null;
 		  
 	  	// Récupération complète des info de la coordonnées
 		  if(result != null) {
@@ -82,6 +78,10 @@ public class LocoMaps extends HttpServlet {
 			    final GsonBuilder gsonBuilder = new GsonBuilder();
 			    final Gson gson = gsonBuilder.create();
 			    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
+			    adressOrigin = new Adresse2D(origin,gsonCoords);
+			    
+			    // Recherche des voisins
+			    listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
 		  
 		HttpSession sessionScope = request.getSession();

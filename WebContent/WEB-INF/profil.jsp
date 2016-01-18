@@ -38,7 +38,7 @@ ${frame}
 		<label for="waypoint1">Point de passage :</label><input type="text" id="waypoint1" name="waypoint1" placeholder="ex:Balma"><Br>
 		<label for="waypoint2">Point de passage :</label><input type="text" id="waypoint2" name="waypoint2" placeholder="ex:Castanet-Tolosan"><Br>
 		<label for="waypoint3">Point de passage :</label><input type="text" id="waypoint3" name="waypoint3" placeholder="ex:Berlin (mais c'est plus long!)"><Br>
-        <input type='hidden' name='JFM_RESULT' />
+        <input type='hidden' name='result' />
         <input type='hidden' name='coords' />
         <input type='hidden' name='coordslat' />
         <input type='hidden' name='coordslng' />
