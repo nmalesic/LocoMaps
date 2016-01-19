@@ -8,13 +8,19 @@
 <link rel="stylesheet" type="text/css" href="register.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="script/geocode.js"></script>
+
+
 </head>
-<body>
+<body onload="init()">
+
     <c:import url="/WEB-INF/banniere.jsp" /></br>
     <c:import url="/WEB-INF/menu.jsp" /></br>
-
-	
+    
 	<%-- <c:import url="/WEB-INF/recherche.jsp" /> --%>
 
 </body>
 </html>
+
+ 

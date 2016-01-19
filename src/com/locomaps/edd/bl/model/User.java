@@ -8,10 +8,14 @@ public class User {
 	private String email;
 	private String password;
 	private String confirmPassword;
+	
 	private String adresse1;
 	private String adresse2;
 	private String CP;
 	private String ville;
+	
+	private Adresse2D address;
+	
 	private String telephone;
 	private String sexe;
 	private String fumeur;
@@ -58,6 +62,35 @@ public class User {
 		this.fumeur = fumeur;
 	}
 	
+	
+	/**
+	 * 
+	 * @param nomUtil
+	 * @param prenomUtil
+	 * @param pseudo
+	 * @param email
+	 * @param password
+	 * @param confirmPassword
+	 * @param address
+	 * @param telephone
+	 * @param sexe
+	 * @param fumeur
+	 */
+	public User(String nomUtil, String prenomUtil, String pseudo, String email, String password, String confirmPassword,
+			Adresse2D address, String telephone, String sexe, String fumeur) {
+		super();
+		this.nomUtil = nomUtil;
+		this.prenomUtil = prenomUtil;
+		this.pseudo = pseudo;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.address = address;
+		this.telephone = telephone;
+		this.sexe = sexe;
+		this.fumeur = fumeur;
+	}
+
 	public String getNomUtil() {
 		return nomUtil;
 	}
@@ -160,6 +193,15 @@ public class User {
 	
 	public void setFumeur(String fumeur) {
 		this.fumeur = fumeur;
+	}
+
+	
+	public Adresse2D getAddress() {
+		return address;
+	}
+
+	public void setAddress(Adresse2D address) {
+		this.address = address;
 	}
 	
 }

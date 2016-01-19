@@ -2,7 +2,10 @@
  
 <fieldset>
 
+<c:if test="${!empty userSession}">    
     Vous etes connecté en tant que     ${userSession.pseudo}
+</c:if>
+
 
 
 	<div id="tabnav">
