@@ -18,4 +18,3 @@
         </li>
 	</div>
 </fieldset>
-<c:import url="/WEB-INF/profil.jsp" /></br>

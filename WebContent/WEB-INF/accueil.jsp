@@ -18,8 +18,12 @@
     <c:import url="/WEB-INF/banniere.jsp" /></br>
     <c:import url="/WEB-INF/menu.jsp" /></br>
     
-	<%-- <c:import url="/WEB-INF/recherche.jsp" /> --%>
-
+	
+	<c:if test="${!empty userSession}"> 
+ 	 Profil user?
+<%--  	<c:import url="/WEB_INF/UserProfile.jsp" />  --%>
+ 	</c:if>	
+	<c:import url="/WEB-INF/profil.jsp" /></br>
 </body>
 </html>
 
