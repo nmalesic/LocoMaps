@@ -1,5 +1,3 @@
-
-
 <table width="100%" align="center" style="border:none">
 
 <script type="text/javascript">
@@ -39,4 +37,5 @@ function geocodeEtEnvoie(){
  </td>
 </tr>
 </table>
+
 
