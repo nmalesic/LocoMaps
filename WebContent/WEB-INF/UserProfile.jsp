@@ -1,9 +1,5 @@
+<div>
 
-<table width="100%" align="center" style="border:none">
-<tr>
-<td width="50%">
-
-<form method=POST>
 <fieldset>
 <legend> Utilisateur </legend>
 
@@ -17,8 +13,6 @@
 <label for="ville">Ville :</label><input type="text" id="ville" name="ville" size=15 value="${userSession.ville}">
 
 </fieldset>
-</form>
-</td>
-<td></td>
-</tr>
+
+</div>
 

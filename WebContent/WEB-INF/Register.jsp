@@ -24,7 +24,7 @@
 			        <input type="email" name="email" value="${form['email']}"></input><span class="error">${erreurs['email']}</span></br>
 			        <label name="lblPassword">Mot de passe :<span class="requis">*</span></label>
 			        <input type="password" name="password" value="${form['password']}"></input><span class="error">${erreurs['password']}</span></br>
-			        <label name="lblConfirmPassword" >Confirmation du mot de passe :<span class="requis">*</span></label>
+			        <label name="lblConfirmPassword" >Confirmer le mot de passe :<span class="requis">*</span></label>
 			        <input type="password" name="confirmPassword" value="${form['confirmPassword']}"></input></br>
 			        <label name="lblVoie1">Adresse :<span class="requis">*</span></label>
 			        <input name="adresse1" value="${form['adresse1']}"></input><span class="error">${erreurs['adresse1']}</span></br>

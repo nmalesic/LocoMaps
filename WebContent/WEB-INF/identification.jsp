@@ -21,6 +21,6 @@
 		     <INPUT type="RESET" class="btn" name="reset" value="Rafraichir"> <br>
 		</fieldset>
 	</form>
-
+<div align=right>Pas encore inscrit? <a href="Register"> S'inscrire</a></div>
 </body>
 </html>
