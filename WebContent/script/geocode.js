@@ -63,8 +63,9 @@ function init() {
 	  setInterval(checkHashFragment, 200);*/
 	}
 
-function submitQuery() {
-	  var query = document.getElementById("origin").value;
+function submitQuery(adress) {
+	  //var query = document.getElementById("origin").value;
+	  var query = adress;
 	  /*if (/\s*^\-?\d+(\.\d+)?\s*\,\s*\-?\d+(\.\d+)?\s*$/.test(query)) {
 	    var latlng = parseLatLng(query);
 	    if (latlng == null) {
@@ -76,6 +77,20 @@ function submitQuery() {
 	    geocode({ 'address': query });
 	  //}
 	}
+
+function getOrigin() {
+//	var query = ${form['adresse1']}+'+'+${form['adresse2']}+'+'+${form['CP']}+'+'+${form['ville']};
+	//var query = document.forms['f']['adresse1'].value //; document.getElementById("adresse1").value
+
+	var query = document.f.adresse1.value //; document.getElementById("adresse1").value
+	+'+'+
+	document.f.adresse2.value //document.getElementById("adresse2").value
+	+'+'+
+	document.f.CP.value //document.getElementById("CP").value
+	+'+'+
+	document.f.ville.value //document.getElementById("ville").value;
+	return query;
+}
 
 /**
  * Prepare a geocoding request and send it to the API.
@@ -142,9 +157,9 @@ function geocode(request) {
 	  //getAddressComponentsHtml(result.address_components);
 	  */ 
 	  document.forms['f']['result'].value  = JSON.stringify(results[0]);
-	  document.forms['f']['coords'].value = JSON.stringify(results[0].geometry.location);
-      document.forms['f']['coordslat'].value = results[0].geometry.location.lat();
-      document.forms['f']['coordslng'].value = results[0].geometry.location.lng();
+	  //document.forms['f']['coords'].value = JSON.stringify(results[0].geometry.location);
+      //document.forms['f']['coordslat'].value = results[0].geometry.location.lat();
+      //document.forms['f']['coordslng'].value = results[0].geometry.location.lng();
 	}
  
  /**

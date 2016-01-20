@@ -42,7 +42,7 @@ ${frame}
         <input type='hidden' name='coords' />
         <input type='hidden' name='coordslat' />
         <input type='hidden' name='coordslng' />
-		<input type="button" value="Geocode" onclick="submitQuery()"/>
+		<input type="button" value="Geocode" onclick="submitQuery(document.getElementById("origin").value)"/>
 		<input type=submit value="chercher" class="sansLabel">
 		<div id="suggestions">  </div>
 		</fieldset>
