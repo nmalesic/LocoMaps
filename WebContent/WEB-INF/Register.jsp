@@ -8,12 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Formulaire d'inscription</title>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="script/geocode.js"></script>
 </head>
-<body>
+<body onload="init()">
     <c:import url="/WEB-INF/banniere.jsp" /></br>
 	<fieldset>
 	    <legend>Formulaire Inscription</legend>
-			<form method="POST" action="Register">
+			<form method="POST" action="Register" name="f">
                     <label name="lblNomUtil">Nom :<span class="requis">*</span></label>
                     <input name="nomUtil" value="${form['nomUtil']}"></input><span class="error">${erreurs['nomUtil']}</span></br>
                     <label name="lblPrenomUtil">Prénom :<span class="requis">*</span></label>
@@ -24,7 +26,7 @@
 			        <input type="email" name="email" value="${form['email']}"></input><span class="error">${erreurs['email']}</span></br>
 			        <label name="lblPassword">Mot de passe :<span class="requis">*</span></label>
 			        <input type="password" name="password" value="${form['password']}"></input><span class="error">${erreurs['password']}</span></br>
-			        <label name="lblConfirmPassword" >Confirmer le mot de passe :<span class="requis">*</span></label>
+			        <label name="lblConfirmPassword" >Confirmation du mot de passe :<span class="requis">*</span></label>
 			        <input type="password" name="confirmPassword" value="${form['confirmPassword']}"></input></br>
 			        <label name="lblVoie1">Adresse :<span class="requis">*</span></label>
 			        <input name="adresse1" value="${form['adresse1']}"></input><span class="error">${erreurs['adresse1']}</span></br>
@@ -47,6 +49,8 @@
                     
 			    </p>
 			    <p>
+			        <input type='hidden' name='result' />
+                    <input type="button" value="Geocode" onclick="submitQuery(getOrigin())"/>
 			        <input type="submit" class="btn" name="soumettre" value="Enregistrer"></button>
                     <input type="reset" class="btn" name="annuler" value="Rafraîchir"></button>
 
