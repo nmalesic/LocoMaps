@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.locomaps.edd.bl.model.Adresse2D;
+import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
+import com.locomaps.edd.bl.model.Location;
+import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
 
 /**
@@ -72,6 +78,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		debug();
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
@@ -81,6 +88,9 @@ public class Register extends HttpServlet {
 		erreurs = new HashMap<String, String>();
 		
 		errorStatus = false;
+
+
+		  
 		
 		String nomUtil = request.getParameter(FIELD_NOM_UTIL);
 		errMsg = validateInfo(nomUtil,1);
@@ -223,8 +233,25 @@ public class Register extends HttpServlet {
 		else
 		{
 			// Création de l'utilisateur et transmission à la page jsp
+			
+			String result = request.getParameter("result");
+			
+		  	GoogleGeoCodeResponse gsonCoords = null;
+		  	Adresse2D adressOrigin = null;
+			  
+		  	// Récupération complète des info de la coordonnées
+			  if(result != null) {
+				    
+				    final GsonBuilder gsonBuilder = new GsonBuilder();
+				    final Gson gson = gsonBuilder.create();
+				    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
+				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords);
+				    
+			  }	
+			
 			User newUser = null;
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);			
+			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
@@ -263,6 +290,11 @@ public class Register extends HttpServlet {
 
 	}
 	
+	private void debug() {
+		// TODO Auto-generated method stub
+		System.out.println("debug");
+	}
+
 	public String validateEmail(String mail)
 	{
 		String err = null;

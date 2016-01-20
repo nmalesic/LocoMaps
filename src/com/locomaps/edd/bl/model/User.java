@@ -29,7 +29,7 @@ public class User {
 	}
 	
 	/**
-	 * Constructeur User
+	 * Constructeur User avec adresse du profil
 	 * @param nomUtil
 	 * @param prenomUtil
 	 * @param pseudo
@@ -64,7 +64,7 @@ public class User {
 	
 	
 	/**
-	 * 
+	 * Constructeur User avec adresse Geocodée
 	 * @param nomUtil
 	 * @param prenomUtil
 	 * @param pseudo
