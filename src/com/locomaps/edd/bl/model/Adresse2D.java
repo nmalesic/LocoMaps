@@ -22,6 +22,8 @@ public class Adresse2D {
 	// adresse saisie en zone de recherche
 	private String addressSaisie;
 
+	private Location location;
+	
 	// addresse google maps
 	private GoogleGeoCodeResponse gcoord;
 	
@@ -105,6 +107,14 @@ public class Adresse2D {
 		this.typeAddress2D = typeAddress2D;
 	}
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	/**
 	 * l'adresse est-elle géocodée ?
 	 * @return
