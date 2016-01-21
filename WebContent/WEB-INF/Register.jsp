@@ -10,12 +10,21 @@
 <title>Formulaire d'inscription</title>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="script/geocode.js"></script>
+<script type="text/javascript">
+function geocodeEtEnvoie(){
+    submitQuery();
+    setTimeout(function(){
+        document.forms["itineraire"].submit();
+    }, 1000)
+    
+}
+</script>
 </head>
 <body onload="init()">
     <c:import url="/WEB-INF/banniere.jsp" /></br>
 	<fieldset>
 	    <legend>Formulaire Inscription</legend>
-			<form method="POST" action="Register" name="f">
+			<form method="POST" action="Register" name="f" id="itineraire">
                     <label name="lblNomUtil">Nom :<span class="requis">*</span></label>
                     <input name="nomUtil" value="${form['nomUtil']}"></input><span class="error">${erreurs['nomUtil']}</span></br>
                     <label name="lblPrenomUtil">Prénom :<span class="requis">*</span></label>
@@ -40,19 +49,19 @@
                     <Select name="sexe" size="1" value="${form['sexe']}"></input><span class="error">${erreurs['sexe']}</span></br>
                         <Option>Féminin
                         <Option>Masculin
-                    </Select></br>
+                    </Select><br>
                     <label name="lblFumeur">Fumeur :</label>
                     <Select name="fumeur" size="1" value="${form['fumeur']}"></input><span class="error">${erreurs['fumeur']}</span></br>
                         <Option>Non
                         <Option>Oui
-                    </Select></br>
+                    </Select>
+                    <br>
                     
 			    </p>
 			    <p>
 			        <input type='hidden' name='result' />
-                    <input type="button" value="Geocode" onclick="submitQuery(getOrigin())"/>
-			        <input type="submit" class="btn" name="soumettre" value="Enregistrer"></button>
-                    <input type="reset" class="btn" name="annuler" value="Rafraîchir"></button>
+                    <input type="button" value="Enregistrer" onclick="geocodeEtEnvoie()"/>
+			        <input type="reset" class="btn" name="annuler" value="Rafraîchir"/>
 
 			    <p>
 			</form>

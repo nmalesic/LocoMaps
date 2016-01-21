@@ -14,18 +14,22 @@ public class Adresse2D {
 	private boolean geocode = false;
 	
 	// adresse saisie dans le profil
+	private int id;
 	private String adresse1;
 	private String adresse2;
 	private String CP;
 	private String ville;
+	private String result;
 	
 	// adresse saisie en zone de recherche
 	private String addressSaisie;
 
+	private Location location;
+	
 	// addresse google maps
 	private GoogleGeoCodeResponse gcoord;
 	
-	public Adresse2D(String adresse1, String adresse2, String CP, String ville, GoogleGeoCodeResponse gcoord) {
+	public Adresse2D(String adresse1, String adresse2, String CP, String ville, GoogleGeoCodeResponse gcoord,String result) {
 		super();
 		setTypeAddress2D(TypeAddress.PROFIL);
 		this.adresse1 = adresse1;
@@ -33,7 +37,8 @@ public class Adresse2D {
 		this.CP = CP;
 		this.ville = ville;
 		this.gcoord = gcoord;
-		setGeocode(gcoord != null); 
+		setGeocode(gcoord != null);
+		this.result = result;
 		
 	}
 	
@@ -46,6 +51,13 @@ public class Adresse2D {
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getAdresse1() {
 		return adresse1;
@@ -105,6 +117,22 @@ public class Adresse2D {
 		this.typeAddress2D = typeAddress2D;
 	}
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	/**
 	 * l'adresse est-elle géocodée ?
 	 * @return

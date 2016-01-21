@@ -21,6 +21,10 @@ import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.DataProvider;
+import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceManager;
+import com.locomaps.edd.bl.model.bd.PersistanceParameter;
 
 /**
  * Servlet implementation class Register
@@ -81,7 +85,9 @@ public class Register extends HttpServlet {
 		debug();
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
-		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
+
+		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		form = new HashMap<String, String>();
@@ -245,17 +251,17 @@ public class Register extends HttpServlet {
 				    final GsonBuilder gsonBuilder = new GsonBuilder();
 				    final Gson gson = gsonBuilder.create();
 				    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
-				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords);
+				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords,result);
 				    
 			  }	
 			
 			User newUser = null;
-			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
+			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
-			User userSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+			User userSession = persistance.getUserByEMail(email); 
 			if (userSession == null){
 				// Ajout du nouvel utilisateur dans la session
 				listeUser.put(email,newUser);
