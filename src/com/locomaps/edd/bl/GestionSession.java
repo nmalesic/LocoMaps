@@ -5,63 +5,39 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceManager;
+import com.locomaps.edd.bl.model.bd.PersistanceParameter;
 
 public class GestionSession {
 
 	/**
-	 * Récupère la liste des utilisateurs enregistrés dans la session en cours
-	 * Retour une hashmap vide s'il n'y a pas d'utilisateur
-	 * Exemple d'utilisation :
-	 * 
-	 * HttpSession sessionScope = request.getSession();
-	 * HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
-	 * 
+	 * Récupère l'objet persistence stocké dans la session et le crée à la première utilisation
 	 * @param sessionScope
 	 * @return
 	 */
-	public static HashMap<String,User> getListUser(HttpSession sessionScope) {
-		HashMap<String,User> listeUser = (HashMap<String, User>) sessionScope.getAttribute( "listeUser" ); 
-		if (listeUser == null) {
-			listeUser = new HashMap<String,User>();
+	public static Persistance getPersitanceSession(HttpSession sessionScope) {
+		Persistance persistance = (Persistance) sessionScope.getAttribute("persistance");
+		if (persistance == null) {
+			persistance = PersistanceManager.getPersistance(PersistanceParameter.datatype);
+			persistance.initDB(sessionScope);
+			sessionScope.setAttribute("persistance", persistance);
 		}
-		return listeUser;
+		return persistance;
 	}
-	
+
 	/**
-	 * Récupère l'utilisateur à partir de son mail s'il est inscrit
-	 * retourne null sinon
+	 * Retourne l'utilisateur en cours s'il est connecté Retourne null sinon
 	 * 
 	 * Exemple d'utilisation :
 	 * 
-	 * HttpSession sessionScope = request.getSession();
-	 * User userSession = GestionSession.getuserSessionbyEmail(sessionScope, email);
-	 * 
-	 * @param sessionScope
-	 * @param email
-	 * @return
-	 */
-	public static User getUserSessionbyEmail(HttpSession sessionScope, String email) {
-		HashMap<String,User> listeUser = getListUser(sessionScope);
-		User userSession = listeUser.get(email);
-		return userSession;
-	}
-	
-	/**
-	 * Retourne l'utilisateur en cours s'il est connecté
-	 * Retourne null sinon
-	 * 
-	 * Exemple d'utilisation :
-	 * 
-	 * HttpSession sessionScope = request.getSession();
-	 * User userSession = GestionSession.getuserSession(sessionScope);
+	 * HttpSession sessionScope = request.getSession(); User userSession =
+	 * GestionSession.getuserSession(sessionScope);
 	 * 
 	 * @param sessionScope
 	 * @return
 	 */
 	public static User getUserSession(HttpSession sessionScope) {
-		//User userSession = listeUser.get(email);
-		//User userSession = null;
-		return (User)sessionScope.getAttribute("userSession");
-		//return userSession;
+		return (User) sessionScope.getAttribute("userSession");
 	}
 }
