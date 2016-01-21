@@ -1,3 +1,3 @@
 <div id="baniere">
-<IMG src="Images/LocoMaps3.png" class="image">
+        <a href="accueil"> <IMG src="Images/LocoMaps3.png" class="image" title="Retour à l'accueil"> </a>
 </div>
