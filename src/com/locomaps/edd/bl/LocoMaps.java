@@ -81,12 +81,13 @@ public class LocoMaps extends HttpServlet {
 			    adressOrigin = new Adresse2D(origin,gsonCoords);
 			    
 			    // Recherche des voisins
-			    listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
+			    //listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
 		  
 		HttpSession sessionScope = request.getSession();
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
+		request.setAttribute("origin", origin);
 		
 		User userSession = GestionSession.getUserSession(sessionScope);
 
