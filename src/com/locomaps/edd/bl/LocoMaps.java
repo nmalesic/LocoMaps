@@ -57,7 +57,6 @@ public class LocoMaps extends HttpServlet {
 		String login = request.getParameter("email");
 		String passwd = request.getParameter("password");
 		
-
 		String origin = request.getParameter("origin");
 		String waypoint = request.getParameter("waypoint1")+"|"+request.getParameter("waypoint2")+"|"+request.getParameter("waypoint3");
 
@@ -79,12 +78,18 @@ public class LocoMaps extends HttpServlet {
 			    final Gson gson = gsonBuilder.create();
 			    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
 			    adressOrigin = new Adresse2D(origin,gsonCoords);
+			   
 			    
 			    // Recherche des voisins
 			    //listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
 		  
 		HttpSession sessionScope = request.getSession();
+		if (login!=null){ 
+			origin = MapsUtils.getOrigin(sessionScope);
+			System.out.println(origin);
+			request.setAttribute("origin", origin);	
+			}
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
 		request.setAttribute("origin", origin);
@@ -92,6 +97,8 @@ public class LocoMaps extends HttpServlet {
 		User userSession = GestionSession.getUserSession(sessionScope);
 
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
+
+
 
 		}
 

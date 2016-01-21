@@ -18,6 +18,9 @@ var viewportOverlay = null;
 var initialized = false;
 var hashFragment = "";
 
+var directionsDisplay;
+var directionsService;
+
 function init() {
 	  //var params = parseUrlParams();
 	  //clearOptions();
@@ -61,6 +64,25 @@ function init() {
 	    submitQuery();
 	  }
 	  setInterval(checkHashFragment, 200);*/
+	  
+	  directionsDisplay = new google.maps.DirectionsRenderer();
+	  
+	}
+
+function calcRoute() {
+	  var start = document.getElementById("start").value;
+	  var end = document.getElementById("end").value;
+	  var request = {
+	    origin:start,
+	    destination:end,
+	    travelMode: google.maps.TravelMode.DRIVING
+	  };
+	  directionsService.route(request, function(result, status) {
+	    if (status == google.maps.DirectionsStatus.OK) {
+	      //directionsDisplay.setDirections(result);
+	    	//result.routes[0].warnings
+	    }
+	  });
 	}
 
 function submitQuery(adress) {
