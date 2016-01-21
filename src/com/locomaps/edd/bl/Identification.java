@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.DataProvider;
+import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceManager;
+import com.locomaps.edd.bl.model.bd.PersistanceParameter;
 
 /**
  * Servlet implementation class Identification
@@ -46,13 +50,17 @@ public class Identification extends HttpServlet {
 
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
-		HashMap<String,User> listeUser = GestionSession.getListUser(sessionScope);
+
+		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+
+		
+		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
-		User userSession = GestionSession.getUserSessionbyEmail(sessionScope, email);
+		User userSession = persistance.getUserByEMail(email); 
 
 		if (userSession == null){
 			// L'utilisateur n'existe pas dans la session
