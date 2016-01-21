@@ -11,20 +11,20 @@ import com.locomaps.edd.bl.model.bd.PersistanceParameter;
 
 public class GestionSession {
 
-	/**
-	 * Récupère l'objet persistence stocké dans la session et le crée à la première utilisation
-	 * @param sessionScope
-	 * @return
-	 */
-	public static Persistance getPersitanceSession(HttpSession sessionScope) {
-		Persistance persistance = (Persistance) sessionScope.getAttribute("persistance");
-		if (persistance == null) {
-			persistance = PersistanceManager.getPersistance(PersistanceParameter.datatype);
-			persistance.initDB(sessionScope);
-			sessionScope.setAttribute("persistance", persistance);
-		}
-		return persistance;
-	}
+//	/**
+//	 * Récupère l'objet persistence stocké dans la session et le crée à la première utilisation
+//	 * @param sessionScope
+//	 * @return
+//	 */
+//	public static Persistance getPersitanceSession(HttpSession sessionScope) {
+//		Persistance persistance = (Persistance) sessionScope.getAttribute("persistance");
+//		if (persistance == null) {
+//			persistance = PersistanceManager.getPersistance(PersistanceParameter.datatype);
+//			persistance.getInstance(sessionScope);
+//			sessionScope.setAttribute("persistance", persistance);
+//		}
+//		return persistance;
+//	}
 
 	/**
 	 * Retourne l'utilisateur en cours s'il est connecté Retourne null sinon

@@ -51,7 +51,7 @@ public class Identification extends HttpServlet {
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 
-		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope); //GestionSession.getPersitanceSession(sessionScope);
 
 		
 		HashMap<String,User> listeUser = persistance.listAllUser();

@@ -14,8 +14,9 @@ import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.Persistance;
 
-public class ConnexionDB {
+public class ConnexionDB implements Persistance{
 
 	private String chaineConnection = "jdbc:sqlite:";
 	private static Statement statement;
@@ -72,7 +73,7 @@ public class ConnexionDB {
 	 * Retourne l'instance de la BDD
 	 * @return Instance de la BDD
 	 */
-	public Boolean initDB()
+	public static Persistance getInstance(String chaineDeConnexion)
 	{
 		Boolean ok = true;
 		if (connexionDB == null)
@@ -82,19 +83,20 @@ public class ConnexionDB {
 			{
 				//Connexion à la base de données
 				//connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/fcoeuret/Documents/workspace-sts-3.7.0.RELEASE/TetrisGame/BDD/Tetris.db");
-				connection = DriverManager.getConnection("jdbc:sqlite:" + cheminBase);
+				Class.forName("org.sqlite.JDBC");
+				connection = DriverManager.getConnection(chaineDeConnexion);
 				statement = connection.createStatement();
 				statement.setQueryTimeout(30);
 				
 			}
-			catch (SQLException e) 
+			catch (Exception e) 
 			{
 				// TODO Auto-generated catch block
 				ok = false;
 				e.printStackTrace();
 			}
 		}
-		return ok;
+		return connexionDB;
 	}
 
 	/**
@@ -143,7 +145,7 @@ public class ConnexionDB {
 	 * Enregistre un utilisateur
 	 * @param user Utilisateur
 	 */
-	public Boolean addUser(User user)
+	public boolean addUser(User user)
 	{
 		Boolean ok = true;
 		String rqAdr = "";
@@ -267,6 +269,21 @@ public class ConnexionDB {
 		}
 		return user;
 	}
+
+	@Override
+	public User getUserByEMail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean change(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 	
 
 	

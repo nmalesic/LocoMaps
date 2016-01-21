@@ -4,8 +4,8 @@ import javax.servlet.http.HttpSession;
 
 public class PersistanceParameter {
 
-	public static DataProvider datatype = DataProvider.SESSION;
-	public static String chaineDeConnexion = "";
-	public static HttpSession sessionScope = null;
+	public static DataProvider datatype = DataProvider.SQLITE;
+	public static String chaineDeConnexion = "jdbc:sqlite:WebContent/DB/DB_LocoMaps.db";
+
 	
 }

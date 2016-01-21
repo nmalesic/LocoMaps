@@ -36,11 +36,6 @@ public interface Persistance {
 	 */
 	public boolean change(User user);
 	
-	/**
-	 * Initialisation de la base de données
-	 * 
-	 * @return
-	 */
-	public boolean initDB(Object chaineDeConnexion);
+
 
 }

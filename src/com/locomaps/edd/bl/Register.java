@@ -86,7 +86,8 @@ public class Register extends HttpServlet {
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 
-		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope);
+		//Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
 		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
