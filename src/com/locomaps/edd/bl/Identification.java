@@ -40,6 +40,7 @@ public class Identification extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 	}
 

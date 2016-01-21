@@ -92,6 +92,7 @@ public class LocoMaps extends HttpServlet {
 			}
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
+		request.setAttribute("origin", origin);
 		
 		User userSession = GestionSession.getUserSession(sessionScope);
 

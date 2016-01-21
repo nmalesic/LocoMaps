@@ -37,5 +37,3 @@ function geocodeEtEnvoie(){
  </td>
 </tr>
 </table>
-
-
