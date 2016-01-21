@@ -82,7 +82,6 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		debug();
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 
@@ -271,9 +270,9 @@ public class Register extends HttpServlet {
 				errorStatus = false;
 				
 				request.setAttribute("errorStatus", errorStatus);
-				
+				userSession = newUser;
 				sessionScope.setAttribute("userSession", userSession);
-				response.sendRedirect("identification");
+				response.sendRedirect("accueil");
 				
 			} else {
 				// L'utilisateur existe déjà dans la session
@@ -296,10 +295,7 @@ public class Register extends HttpServlet {
 
 	}
 	
-	private void debug() {
-		// TODO Auto-generated method stub
-		System.out.println("debug");
-	}
+
 
 	public String validateEmail(String mail)
 	{
