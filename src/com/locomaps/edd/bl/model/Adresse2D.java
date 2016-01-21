@@ -38,6 +38,7 @@ public class Adresse2D {
 		this.ville = ville;
 		this.gcoord = gcoord;
 		setGeocode(gcoord != null);
+		this.location = new Location("","");
 		this.result = result;
 		
 	}
