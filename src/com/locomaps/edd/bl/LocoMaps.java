@@ -55,6 +55,7 @@ public class LocoMaps extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String login = request.getParameter("email");
+		System.out.println("email : "+login);
 		String passwd = request.getParameter("password");
 		
 		String origin = request.getParameter("origin");
@@ -85,16 +86,16 @@ public class LocoMaps extends HttpServlet {
 		  }		  
 		  
 		HttpSession sessionScope = request.getSession();
-		if (login!=null){ 
-			origin = MapsUtils.getOrigin(sessionScope);
-			System.out.println(origin);
-			request.setAttribute("origin", origin);	
-			}
+		User userSession = GestionSession.getUserSession(sessionScope);
+		
+		
+		
 		String frame = MapsUtils.composeItineraire(origin,"64+rue+jean+rostand+31670+Labege",waypoint);
 		request.setAttribute("frame", frame);
+		System.out.println("Origine : "+origin);
 		request.setAttribute("origin", origin);
 		
-		User userSession = GestionSession.getUserSession(sessionScope);
+		
 
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 
