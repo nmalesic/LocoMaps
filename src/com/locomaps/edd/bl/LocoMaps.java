@@ -81,7 +81,7 @@ public class LocoMaps extends HttpServlet {
 			   
 			    
 			    // Recherche des voisins
-			    listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
+			    //listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
 		  
 		HttpSession sessionScope = request.getSession();
@@ -98,40 +98,6 @@ public class LocoMaps extends HttpServlet {
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 
 
-		//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
-		//sessionScope.getAttribute("UserSession");
-		
-		/*RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-		dispat.forward(request,response);
-		*/
-		
-//		if (login.equals("sylvain") ){
-//			RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-//			dispat.forward(request,response);
-//		}
-//		else{
-//			doGet(request, response);
-//		}
-		
-		
-		
-//		if (UserSession == null){
-//			// L'utilisateur n'existe pas dans la session
-//			doGet(request, response);
-//			
-//		} else {
-//			// L'utilisateur existe dans la session
-//			// Test du password
-//
-//			if (passwd.equals(UserSession.getPassword())){
-//				sessionScope.setAttribute("UserSession", UserSession);
-//				RequestDispatcher dispat =	request.getRequestDispatcher("/accueil");
-//				dispat.forward(request,response);
-//			} else {
-//				// Le mot de passe est incorrect
-//			}
-//				doGet(request, response);
-//			}
 
 		}
 
