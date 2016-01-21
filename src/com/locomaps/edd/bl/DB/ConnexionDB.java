@@ -105,7 +105,7 @@ public class ConnexionDB {
 	{
 		HashMap<String, User> listUser = new HashMap<String, User>();
 
-		String rq = "SELECT * FROM UTILISATEUR LEFT JOIN UTILISATEUR.IDUTILISATEUR = ADRESSE.IDUTILISATEUR";
+		String rq = "SELECT * FROM UTILISATEUR U LEFT JOIN ADRESSE A ON U.IDUTILISATEUR = A.IDUTILISATEUR";
 		try 
 		{
 			ResultSet res = statement.executeQuery(rq);
