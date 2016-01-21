@@ -12,8 +12,9 @@
 <script type="text/javascript" src="script/geocode.js"></script>
 </head>
 <body onload="init()">
-    <c:import url="/WEB-INF/banniere.jsp" /></br>
-	<fieldset>
+<c:import url="/WEB-INF/banniere.jsp" /></br>
+<c:import url="/WEB-INF/menu.jsp" /></br>
+    	<fieldset>
 	    <legend>Formulaire Inscription</legend>
 			<form method="POST" action="Register" name="f">
                     <label name="lblNomUtil">Nom :<span class="requis">*</span></label>

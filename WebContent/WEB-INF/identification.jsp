@@ -13,7 +13,8 @@
 
 <form method="POST">
 <c:import url="/WEB-INF/banniere.jsp" /></br>
-        <fieldset>
+    <c:import url="/WEB-INF/menu.jsp" /></br>
+            <fieldset>
             <legend>Identification</legend>
 		     Email : <input required name="email" size=50 maxlength="50\" />
              Password : <input type="password" name="password" size=20 maxlength="20" />
