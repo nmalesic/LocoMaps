@@ -2,6 +2,8 @@ package com.locomaps.edd.bl.model;
 
 public class User {
 
+	
+	private int id;
 	private String nomUtil;
 	private String prenomUtil;
 	private String pseudo;
@@ -89,6 +91,14 @@ public class User {
 		this.telephone = telephone;
 		this.sexe = sexe;
 		this.fumeur = fumeur;
+	}
+		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNomUtil() {

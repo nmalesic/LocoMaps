@@ -251,7 +251,7 @@ public class Register extends HttpServlet {
 				    final GsonBuilder gsonBuilder = new GsonBuilder();
 				    final Gson gson = gsonBuilder.create();
 				    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
-				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords);
+				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords,result);
 				    
 			  }	
 			
