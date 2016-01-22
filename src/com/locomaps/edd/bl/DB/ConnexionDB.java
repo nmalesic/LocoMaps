@@ -75,6 +75,7 @@ public class ConnexionDB implements Persistance{
 	 */
 	public static Persistance getInstance(String chaineDeConnexion)
 	{
+		
 		Boolean ok = true;
 		if (connexionDB == null)
 		{	
@@ -278,9 +279,31 @@ public class ConnexionDB implements Persistance{
 
 
 	@Override
-	public boolean change(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean change(User user) 
+	{
+		Boolean ok = true;
+		String rqAdr = "";
+		try 
+		{
+			String rqUtil = "UPDATE UTILISATEUR SET NOM = \"" + user.getNomUtil() + "\", PRENOM = \"" + user.getPrenomUtil() + "\", PSEUDO = \"" + user.getPseudo() + "\", EMAIL = \"" + user.getEmail() + "\", PASSWORD = \"" + user.getPassword() + "\", SEXE = \"" + user.getSexe() + "\", FUMEUR = \"" + user.getFumeur() + "\", TELEPHONE = \"" + user.getTelephone() + "\" WHERE IDUTILISATEUR = " + user.getId();
+			statement.executeUpdate(rqUtil);
+			int idUser = getIdUserByEmail(user.getEmail());
+			if (idUser != 0)
+			{
+				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = " + user.getAddress().getLocation().lat + ", LONGITUDE = " + user.getAddress().getLocation().lng + ",TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D() + "\",GCOORD = \"" + user.getAddress().getResult() + "\" WHERE IDADRESSE = " + user.getAddress().getId();
+			}
+			statement.executeUpdate(rqAdr);
+		}
+		catch (SQLException e) 
+		{
+			ok = false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			return ok;
+		}
 	}
 
 

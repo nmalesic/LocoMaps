@@ -360,7 +360,17 @@ public class Register extends HttpServlet {
 					err = "L'adresse est obligatoire";
 					break;
 				case 5:
-					err = "Le code postal est obligatoire";
+					if (name == null || name.equals(""))
+					{
+						err = "Le code postal est obligatoire";
+					}
+					else
+					{
+						if (name.matches("([0-9])"))
+						{
+							err = "Le code postal doit être numérique";
+						}
+					}
 					break;
 				case 6:
 					err = "La ville est obligatoire";

@@ -53,8 +53,8 @@ public class ConnexionDBTest {
 		user.setFumeur("Non");
 		user.setTelephone("0233455521");
 		Adresse2D adresse = new Adresse2D("8 bis rue du petit midi","","72400","PREVAL",gCoord,"result");
-		location.setLat("100");
-		location.setLng("200");
+		location.setLat("");
+		location.setLng("");
 		adresse.setLocation(location);
 		user.setAddress(adresse);
 		listUser.add(user);
