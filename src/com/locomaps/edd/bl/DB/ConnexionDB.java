@@ -264,12 +264,13 @@ public class ConnexionDB implements Persistance{
 			user.setSexe(res.getString(7));
 			user.setFumeur(res.getString(8));
 			user.setTelephone(res.getString(9));
-			GoogleGeoCodeResponse gcoord = new GoogleGeoCodeResponse();
+			//GoogleGeoCodeResponse gcoord = new GoogleGeoCodeResponse();
+			
 			Location location = new Location();
 			location.setLat(res.getString(16));
 			location.setLng(res.getString(17));
-			Adresse2D adresse = new Adresse2D(res.getString(12),res.getString(13),res.getString(14),res.getString(15),gcoord,res.getString(19));
-			adresse.setLocation(location);
+			Adresse2D adresse = new Adresse2D(res.getString(12),res.getString(13),res.getString(14),res.getString(15),res.getString(19));
+			//adresse.setLocation(location);
 			user.setAddress(adresse);
 		} 
 		catch (SQLException e) 

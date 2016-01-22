@@ -42,7 +42,7 @@ public class ConnexionDBTest {
 		listUser = new ArrayList<User>();
 		//User 1
 		User user = new User();
-		GoogleGeoCodeResponse gCoord = new GoogleGeoCodeResponse();
+		//GoogleGeoCodeResponse gCoord = new GoogleGeoCodeResponse();
 		Location location = new Location();
 		user.setNomUtil("COEURET");
 		user.setPrenomUtil("Fabrice");
@@ -52,7 +52,7 @@ public class ConnexionDBTest {
 		user.setSexe("Masculin");
 		user.setFumeur("Non");
 		user.setTelephone("0233455521");
-		Adresse2D adresse = new Adresse2D("8 bis rue du petit midi","","72400","PREVAL",gCoord,"result");
+		Adresse2D adresse = new Adresse2D("8 bis rue du petit midi","","72400","PREVAL","result");
 		location.setLat("");
 		location.setLng("");
 		adresse.setLocation(location);
@@ -61,7 +61,7 @@ public class ConnexionDBTest {
 		
 		//User 2
 		user = new User();
-		gCoord = new GoogleGeoCodeResponse();
+		//gCoord = new GoogleGeoCodeResponse();
 		location = new Location();
 		user.setNomUtil("MALESIC");
 		user.setPrenomUtil("Nicolas");
@@ -71,7 +71,7 @@ public class ConnexionDBTest {
 		user.setSexe("Masculin");
 		user.setFumeur("Non");
 		user.setTelephone("06.32.55.55.66");
-		adresse = new Adresse2D("Rue Ampère","Près de SEGILOG","59340","FRELINGHIEN",gCoord,"result");
+		adresse = new Adresse2D("Rue Ampère","Près de SEGILOG","59340","FRELINGHIEN","result");
 		location.setLat("300");
 		location.setLng("2500");
 		adresse.setLocation(location);
@@ -80,7 +80,7 @@ public class ConnexionDBTest {
 		
 		//User 3
 		user = new User();
-		gCoord = new GoogleGeoCodeResponse();
+		//gCoord = new GoogleGeoCodeResponse();
 		location = new Location();
 		user.setNomUtil("CHAMAYOU");
 		user.setPrenomUtil("Olivier");
@@ -90,7 +90,7 @@ public class ConnexionDBTest {
 		user.setSexe("Masculin");
 		user.setFumeur("Oui");
 		user.setTelephone("07-54-54-54-44");
-		adresse = new Adresse2D("Rue de chez lui","Dans sa maison","31000","TOULOUSE",gCoord,"result");
+		adresse = new Adresse2D("Rue de chez lui","Dans sa maison","31000","TOULOUSE","result");
 		location.setLat("400");
 		location.setLng("700");
 		adresse.setLocation(location);
@@ -99,7 +99,7 @@ public class ConnexionDBTest {
 		
 		//User 4
 		user = new User();
-		gCoord = new GoogleGeoCodeResponse();
+		//gCoord = new GoogleGeoCodeResponse();
 		location = new Location();
 		user.setNomUtil("RABOIS");
 		user.setPrenomUtil("Sylvain");
@@ -109,7 +109,7 @@ public class ConnexionDBTest {
 		user.setSexe("Masculin");
 		user.setFumeur("Non");
 		user.setTelephone("");
-		adresse = new Adresse2D("Boulevard de l'Europe","","31320","CASTANET-TOLOSAN",gCoord,"result");
+		adresse = new Adresse2D("Boulevard de l'Europe","","31320","CASTANET-TOLOSAN","result");
 		location.setLat("800");
 		location.setLng("650");
 		adresse.setLocation(location);
@@ -118,7 +118,7 @@ public class ConnexionDBTest {
 		
 		//User 5
 		user = new User();
-		gCoord = new GoogleGeoCodeResponse();
+		//gCoord = new GoogleGeoCodeResponse();
 		location = new Location();
 		user.setNomUtil("DECHERF");
 		user.setPrenomUtil("Floriane");
@@ -128,7 +128,7 @@ public class ConnexionDBTest {
 		user.setSexe("Féminin");
 		user.setFumeur("Non");
 		user.setTelephone("0900000000");
-		adresse = new Adresse2D("Place de l église","","72600","ST VINCENT DES PRES",gCoord,"result");
+		adresse = new Adresse2D("Place de l église","","72600","ST VINCENT DES PRES","result");
 		location.setLat("1500");
 		location.setLng("750");
 		adresse.setLocation(location);

@@ -245,22 +245,32 @@ public class Register extends HttpServlet {
 			
 			String result = request.getParameter("result");
 			
-		  	GoogleGeoCodeResponse gsonCoords = null;
+		  	//GoogleGeoCodeResponse gsonCoords = null;
 		  	Adresse2D adressOrigin = null;
 			  
 		  	// Récupération complète des info de la coordonnées
 			  if(result != null) {
-				    
-				    final GsonBuilder gsonBuilder = new GsonBuilder();
-				    final Gson gson = gsonBuilder.create();
-				    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
-				    adressOrigin = new Adresse2D(adr1,adr2,cp,ville,gsonCoords,result);
-				    
-			  }	
+				  adressOrigin = new Adresse2D(adr1,adr2,cp,ville,result);
+			  } else {
+				  //** Interdiction d'enregistré une adresse non géocodée
+					// Enregistrer le statut de l'action
+					actionMessage = "Echec de l'inscription";
+					errorStatus = true;
+					errMsg = "L'adresse n'a pas pu être géocodée";
+					erreurs.put(FIELD_VILLE, errMsg);
+
+					request.setAttribute("form", form);
+					request.setAttribute("erreurs", erreurs);
+					request.setAttribute("actionMessage", actionMessage);
+					request.setAttribute("errorStatus", errorStatus);
+
+					doGet(request, response);
+			  }
 			
 			User newUser = null;
-			Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, newAdress, tel, sexe, fumeur);
+			//Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
+			
 			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
 			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
 			request.setAttribute("newUser", newUser);
