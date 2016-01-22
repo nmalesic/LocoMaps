@@ -12,7 +12,7 @@
 <script type="text/javascript" src="script/geocode.js"></script>
 <script type="text/javascript">
 function geocodeEtEnvoie(){
-    submitQuery();
+    submitQuery(getOrigin());
     setTimeout(function(){
         document.forms["itineraire"].submit();
     }, 1000)

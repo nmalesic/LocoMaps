@@ -17,7 +17,7 @@
 <script type="text/javascript" src="script/geocode.js"></script>
 <script type="text/javascript">
 function geocodeEtEnvoie(){
-    submitQuery();
+    submitQuery(getOrigin());
     setTimeout(function(){
         document.forms["userprofile"].submit();
     }, 1000)
@@ -26,7 +26,7 @@ function geocodeEtEnvoie(){
 </script>
 
 <div>
-	<form method="POST" action="UserProfile" id="userprofile">
+	<form method="POST" action="UserProfile" name="f" id="userprofile">
 		<fieldset>
 
 

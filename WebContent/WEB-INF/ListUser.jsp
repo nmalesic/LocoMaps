@@ -14,8 +14,15 @@
 <tr class="${pStatus.index%2==0?'pair':'impair'}">
 <td>${p}</td>
 <td>TEST</td>
-<td>${pStatus.count} rue du Test 99999 ESSAI</td>
-
+<td><c:choose>
+  <c:when test="${!empty userSession}">
+  ${pStatus.count} rue du Test 99999 ESSAI
+ </c:when>
+    <c:otherwise>
+   <span class=> <a href="identification"> Vous devez être connecté</a></span>
+  </c:otherwise>
+</c:choose>
+</td>
 
 
 <td ><c:choose>

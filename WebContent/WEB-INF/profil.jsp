@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
 function geocodeEtEnvoie(){
-	submitQuery();
+	submitQuery(document.getElementById("origin").value);
 	setTimeout(function(){
 	    document.forms["itineraire"].submit();
 	}, 1000)
@@ -24,6 +24,12 @@ function geocodeEtEnvoie(){
 		<label for="waypoint1">Point de passage :</label><input type="text" id="waypoint1" name="waypoint1" placeholder="ex:Balma"><Br>
 		<label for="waypoint2">Point de passage :</label><input type="text" id="waypoint2" name="waypoint2" placeholder="ex:Castanet-Tolosan"><Br>
 		<label for="waypoint3">Point de passage :</label><input type="text" id="waypoint3" name="waypoint3" placeholder="ex:Berlin (mais c'est plus long!)"><Br>
+		<label for="rayon">Rayon de Recherche :</label>
+		<Select size="1" id="rayon" name="rayon"> 
+		<option value="1" name="1" selected>1</option>
+		<option value="2" name="2" >2</option>
+		<option value="3" name="3" >3</option>
+		</Select> KM<br>
         <input type='hidden' name='result' />
         <input type='hidden' name='coords' />
         <input type='hidden' name='coordslat' />
