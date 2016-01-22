@@ -65,10 +65,21 @@ public static HashMap<String,User> chercheVoisin(HttpSession sessionScope, Locat
 	
 	HashMap<String,User> listeUser = persistance.listAllUser();
 	
+	HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
+
 	for(Map.Entry<String,User> user : listeUser.entrySet()){
 		
 		//user.getKey();
-//		user.getValue().getAddress().getLocation().lat, user.getValue().getAddress().getLocation().lng; 
+		if (distance(Double.parseDouble(user.getValue().getAddress().getLocation().lat)
+				,Double.parseDouble(centre.lat)
+				,Double.parseDouble(user.getValue().getAddress().getLocation().lng)
+				,Double.parseDouble(centre.lng)
+				,(double)0
+				,(double)0)
+				< Rayon*1000) {
+			listUserDansRayon.put(user.getKey(), user.getValue());
+		}
+		 
 		}
 
 	
@@ -78,7 +89,6 @@ public static HashMap<String,User> chercheVoisin(HttpSession sessionScope, Locat
 //		
 //	}
 
-	HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
 			
 	// TODO Chercher les utilisateurs dont l'adresse est dans le rayon demandé
 	// On pourrait utiliser une requête de ce type pour filtrer les voisins dans un carré inscrit dans le rayon demandé
