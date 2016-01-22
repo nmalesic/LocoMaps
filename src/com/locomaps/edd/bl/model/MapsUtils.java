@@ -60,12 +60,13 @@ public static String composeItineraire(String origin, String destination, String
  * @param Rayon Rayon de recherche
  * @return
  */
-public static HashMap<String,User> chercheVoisin(HttpSession sessionScope, Location centre, int Rayon) {
+public static ArrayList<User>  chercheVoisin(HttpSession sessionScope, Location centre, int Rayon) {
 	Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope); //GestionSession.getPersitanceSession(sessionScope);
 	
 	HashMap<String,User> listeUser = persistance.listAllUser();
 	
-	HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
+	//HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
+	ArrayList<User> listUserDansRayon = new ArrayList<User>() ;
 
 	for(Map.Entry<String,User> user : listeUser.entrySet()){
 		
@@ -77,7 +78,7 @@ public static HashMap<String,User> chercheVoisin(HttpSession sessionScope, Locat
 				,(double)0
 				,(double)0)
 				< Rayon*1000) {
-			listUserDansRayon.put(user.getKey(), user.getValue());
+			listUserDansRayon.add(user.getValue());
 		}
 		 
 		}

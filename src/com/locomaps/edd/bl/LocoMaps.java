@@ -70,7 +70,7 @@ public class LocoMaps extends HttpServlet {
 	  	Location coordLatlng = null;
 	  	GoogleGeoCodeResponse gsonCoords = null;
 	  	Adresse2D adressOrigin = null;
-	  	HashMap<String,User> listUserDansRayon = null;
+	  	ArrayList<User> listUserDansRayon = null;
 		  
 		HttpSession sessionScope = request.getSession();
 		User userSession = GestionSession.getUserSession(sessionScope);
