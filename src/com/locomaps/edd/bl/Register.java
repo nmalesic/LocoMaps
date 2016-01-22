@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.locomaps.edd.bl.DB.ConnexionDB;
 import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
@@ -82,11 +83,13 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		debug();
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 
-		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		//Persistance persistance = ConnexionDB.getInstance(PersistanceParameter.chaineDeConnexion);
+		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope);
+		
+		//Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
 		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
@@ -256,24 +259,45 @@ public class Register extends HttpServlet {
 			  }	
 			
 			User newUser = null;
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
+			Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
+			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, newAdress, tel, sexe, fumeur);
+			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
 			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
 			request.setAttribute("newUser", newUser);
 			
 			// Ajout du nouvel utilisateur dans la session
-			User userSession = persistance.getUserByEMail(email); 
+			User userSession = persistance.getUserByEmail(email); 
 			if (userSession == null){
 				// Ajout du nouvel utilisateur dans la session
+				if (persistance.addUser(newUser)) {
 				listeUser.put(email,newUser);
+				
 				
 				// Enregistrer le statut de l'action
 				actionMessage = "Succès de l'inscription";
 				errorStatus = false;
 				
 				request.setAttribute("errorStatus", errorStatus);
-				
+				userSession = newUser;
 				sessionScope.setAttribute("userSession", userSession);
-				response.sendRedirect("identification");
+				response.sendRedirect("accueil");
+				} else {
+					
+					// L'utilisateur existe déjà dans la session
+					// Enregistrer le statut de l'action
+					actionMessage = "Echec de l'inscription";
+					errorStatus = true;
+					errMsg = "L'email est déjà utilisé";
+					erreurs.put(FIELD_EMAIL, errMsg);
+
+					request.setAttribute("form", form);
+					request.setAttribute("erreurs", erreurs);
+					request.setAttribute("actionMessage", actionMessage);
+					request.setAttribute("errorStatus", errorStatus);
+
+					doGet(request, response);
+				}
+				
 				
 			} else {
 				// L'utilisateur existe déjà dans la session
@@ -296,10 +320,7 @@ public class Register extends HttpServlet {
 
 	}
 	
-	private void debug() {
-		// TODO Auto-generated method stub
-		System.out.println("debug");
-	}
+
 
 	public String validateEmail(String mail)
 	{
@@ -363,7 +384,17 @@ public class Register extends HttpServlet {
 					err = "L'adresse est obligatoire";
 					break;
 				case 5:
-					err = "Le code postal est obligatoire";
+					if (name == null || name.equals(""))
+					{
+						err = "Le code postal est obligatoire";
+					}
+					else
+					{
+						if (name.matches("([0-9])"))
+						{
+							err = "Le code postal doit être numérique";
+						}
+					}
 					break;
 				case 6:
 					err = "La ville est obligatoire";

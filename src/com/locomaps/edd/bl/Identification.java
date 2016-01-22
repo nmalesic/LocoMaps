@@ -40,6 +40,7 @@ public class Identification extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request,response);
 	}
 
@@ -51,7 +52,7 @@ public class Identification extends HttpServlet {
 		// Lecture de la liste des utilisateurs de la session
 		HttpSession sessionScope = request.getSession();
 
-		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope); //GestionSession.getPersitanceSession(sessionScope);
 
 		
 		HashMap<String,User> listeUser = persistance.listAllUser();
@@ -60,7 +61,7 @@ public class Identification extends HttpServlet {
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
-		User userSession = persistance.getUserByEMail(email); 
+		User userSession = persistance.getUserByEmail(email); 
 
 		if (userSession == null){
 			// L'utilisateur n'existe pas dans la session

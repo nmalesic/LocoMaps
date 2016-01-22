@@ -22,6 +22,8 @@ function geocodeEtEnvoie(){
 </head>
 <body onload="init()">
     <c:import url="/WEB-INF/banniere.jsp" /></br>
+    <c:import url="/WEB-INF/menu.jsp" /></br>
+    
 	<fieldset>
 	    <legend>Formulaire Inscription</legend>
 			<form method="POST" action="Register" name="f" id="itineraire">

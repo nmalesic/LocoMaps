@@ -14,23 +14,24 @@ import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.Persistance;
 
-public class ConnexionDB {
+public class ConnexionDB implements Persistance{
 
-	private String chaineConnection = "jdbc:sqlite:";
+	//private String chaineConnection = "jdbc:sqlite:";
 	private static Statement statement;
 	private static Connection connection;
 	private static ConnexionDB connexionDB = null;
 	//private static String cheminBase = "C:/Users/fcoeuret/Documents/workspace-sts-3.7.0.RELEASE/LocoMaps/WebContent/DB/DB_LocoMaps.db";
-	private String cheminBase = "WebContent/DB/DB_LocoMaps.db";
+	//private String cheminBase = "WebContent/DB/DB_LocoMaps.db";
 
-	public String getChaineConnection() {
-		return chaineConnection;
-	}
-
-	public void setChaineConnection(String chaineConnection) {
-		this.chaineConnection = chaineConnection;
-	}
+//	public String getChaineConnection() {
+//		return chaineConnection;
+//	}
+//
+//	public void setChaineConnection(String chaineConnection) {
+//		this.chaineConnection = chaineConnection;
+//	}
 
 	public static Statement getStatement() {
 		return statement;
@@ -56,13 +57,13 @@ public class ConnexionDB {
 		ConnexionDB.connexionDB = connexionDB;
 	}
 	
-	public String getcheminBase() {
-		return cheminBase;
-	}
-
-	public void setcheminBase(String cheminBase) {
-		this.cheminBase = cheminBase;
-	}
+//	public String getcheminBase() {
+//		return cheminBase;
+//	}
+//
+//	public void setcheminBase(String cheminBase) {
+//		this.cheminBase = cheminBase;
+//	}
 
 	public ConnexionDB() {
 		// TODO Auto-generated constructor stub
@@ -72,8 +73,9 @@ public class ConnexionDB {
 	 * Retourne l'instance de la BDD
 	 * @return Instance de la BDD
 	 */
-	public Boolean initDB()
+	public static Persistance getInstance(String chaineDeConnexion)
 	{
+		
 		Boolean ok = true;
 		if (connexionDB == null)
 		{	
@@ -82,19 +84,20 @@ public class ConnexionDB {
 			{
 				//Connexion à la base de données
 				//connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/fcoeuret/Documents/workspace-sts-3.7.0.RELEASE/TetrisGame/BDD/Tetris.db");
-				connection = DriverManager.getConnection("jdbc:sqlite:" + cheminBase);
+				Class.forName("org.sqlite.JDBC");
+				connection = DriverManager.getConnection(chaineDeConnexion);
 				statement = connection.createStatement();
 				statement.setQueryTimeout(30);
 				
 			}
-			catch (SQLException e) 
+			catch (Exception e) 
 			{
 				// TODO Auto-generated catch block
 				ok = false;
 				e.printStackTrace();
 			}
 		}
-		return ok;
+		return connexionDB;
 	}
 
 	/**
@@ -143,7 +146,7 @@ public class ConnexionDB {
 	 * Enregistre un utilisateur
 	 * @param user Utilisateur
 	 */
-	public Boolean addUser(User user)
+	public boolean addUser(User user)
 	{
 		Boolean ok = true;
 		String rqAdr = "";
@@ -154,11 +157,19 @@ public class ConnexionDB {
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\"," + user.getAddress().getLocation().lat + "," + user.getAddress().getLocation().lng + ",\"" + user.getAddress().getTypeAddress2D() + "\",\"" + user.getAddress().getResult() + "\")";
+				String a = user.getAddress().getAdresse1();
+				a = user.getAddress().getAdresse2();
+				a = user.getAddress().getCP();
+				a = user.getAddress().getVille();
+				a = user.getAddress().getLocation().lat;
+				a = user.getAddress().getLocation().lng;
+				a = user.getAddress().getTypeAddress2D().toString();
+				a = user.getAddress().getResult();
+				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\",\"" + user.getAddress().getLocation().lat + "\",\"" + user.getAddress().getLocation().lng + "\",\"" + user.getAddress().getTypeAddress2D().toString() + "\",\"" + user.getAddress().getResult() + "\")";
 			}
 			statement.executeUpdate(rqAdr);
 		}
-		catch (SQLException e) 
+		catch (Exception e) 
 		{
 			ok = false;
 			// TODO Auto-generated catch block
@@ -195,11 +206,13 @@ public class ConnexionDB {
 		}
 	}
 	
+
 	/**
 	 * Recherche User par son email
 	 * @param email
 	 * @return User
 	 */
+	@Override
 	public User getUserByEmail(String email)
 	{
 		User user = new User();
@@ -267,6 +280,40 @@ public class ConnexionDB {
 		}
 		return user;
 	}
+
+
+
+	@Override
+	public boolean change(User user) 
+	{
+		Boolean ok = true;
+		String rqAdr = "";
+		try 
+		{
+			String rqUtil = "UPDATE UTILISATEUR SET NOM = \"" + user.getNomUtil() + "\", PRENOM = \"" + user.getPrenomUtil() + "\", PSEUDO = \"" + user.getPseudo() + "\", EMAIL = \"" + user.getEmail() + "\", PASSWORD = \"" + user.getPassword() + "\", SEXE = \"" + user.getSexe() + "\", FUMEUR = \"" + user.getFumeur() + "\", TELEPHONE = \"" + user.getTelephone() + "\" WHERE IDUTILISATEUR = " + user.getId();
+			statement.executeUpdate(rqUtil);
+			int idUser = getIdUserByEmail(user.getEmail());
+			if (idUser != 0)
+			{
+				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = " + user.getAddress().getLocation().lat + ", LONGITUDE = " + user.getAddress().getLocation().lng + ",TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D() + "\",GCOORD = \"" + user.getAddress().getResult() + "\" WHERE IDADRESSE = " + user.getAddress().getId();
+			}
+			statement.executeUpdate(rqAdr);
+		}
+		catch (SQLException e) 
+		{
+			ok = false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			return ok;
+		}
+	}
+
+
+
+
 	
 
 	

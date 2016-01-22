@@ -17,6 +17,8 @@ import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.TypeAddress;
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceParameter;
 
 public class ConnexionDBTest {
 
@@ -24,7 +26,7 @@ public class ConnexionDBTest {
 	private Statement statement;
 	private TypeAddress typeAdresse;
 	private ArrayList<User> listUser;
-	private static String cheminBase = "WebContent/DB/DB_LocoMaps_Test.db";
+	private static String cheminBase = "jdbc:sqlite:WebContent/DB/DB_LocoMaps_Test.db";
 
 
 	
@@ -51,8 +53,8 @@ public class ConnexionDBTest {
 		user.setFumeur("Non");
 		user.setTelephone("0233455521");
 		Adresse2D adresse = new Adresse2D("8 bis rue du petit midi","","72400","PREVAL",gCoord,"result");
-		location.setLat("100");
-		location.setLng("200");
+		location.setLat("");
+		location.setLng("");
 		adresse.setLocation(location);
 		user.setAddress(adresse);
 		listUser.add(user);
@@ -136,21 +138,18 @@ public class ConnexionDBTest {
 	}
 	
 	@Test
-	public void initDBTest() {
+	public void getInstanceTest() {
 		
 		Boolean res = true;
-		connexionDB = new ConnexionDB();
-		connexionDB.setcheminBase(cheminBase);
-		Boolean ret = connexionDB.initDB();
-		assertEquals(res, ret);
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
 	}
 
 	private void deleteBase()
 	{
-		connexionDB = new ConnexionDB();
-		Boolean retConnexion = connexionDB.initDB();
-		connexionDB.setcheminBase(cheminBase);
-		if (retConnexion)
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
+		if (connexionDB != null)
 		{
 			try 
 			{
@@ -175,11 +174,10 @@ public class ConnexionDBTest {
 	public void addUserTest()
 	{
 		initListUser();
-		connexionDB = new ConnexionDB();
-		Boolean retConnexion = connexionDB.initDB();
-		connexionDB.setcheminBase(cheminBase);
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
 		Boolean retUser = false;
-		if (retConnexion)
+		if (connexionDB != null)
 		{
 			deleteBase();
 			User user = new User();
@@ -199,11 +197,10 @@ public class ConnexionDBTest {
 	public void getUserByEmailTest()
 	{
 		initListUser();
-		connexionDB = new ConnexionDB();
-		connexionDB.setcheminBase(cheminBase);
-		Boolean retConnexion = connexionDB.initDB();
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
 		Boolean retUser = false;
-		if (retConnexion)
+		if (connexionDB != null)
 		{
 			deleteBase();
 			User user = new User();
@@ -241,11 +238,10 @@ public class ConnexionDBTest {
 		HashMap<String, User> mapUserRet = new HashMap<String, User>();
 		User user = null;
 		initListUser();
-		connexionDB = new ConnexionDB();
-		connexionDB.setcheminBase(cheminBase);
-		Boolean retConnexion = connexionDB.initDB();
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
 		Boolean retUser = false;
-		if (retConnexion)
+		if (connexionDB != null)
 		{
 			deleteBase();
 			Iterator<User> it = listUser.iterator();
