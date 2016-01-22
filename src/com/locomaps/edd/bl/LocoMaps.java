@@ -70,7 +70,7 @@ public class LocoMaps extends HttpServlet {
 	  	Location coordLatlng = null;
 	  	GoogleGeoCodeResponse gsonCoords = null;
 	  	Adresse2D adressOrigin = null;
-	  	ArrayList<User> listUserDansRayon = null;
+	  	HashMap<String,User> listUserDansRayon = null;
 		  
 		HttpSession sessionScope = request.getSession();
 		User userSession = GestionSession.getUserSession(sessionScope);
@@ -82,9 +82,9 @@ public class LocoMaps extends HttpServlet {
 			   
 			    
 			    // Recherche des voisins
-			    //listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,adressOrigin.getGcoord().geometry.location, 5000);
+			    listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
-		  
+		  request.setAttribute("listUserDansRayon", listUserDansRayon);
 		
 		
 		if (origin!=null){
