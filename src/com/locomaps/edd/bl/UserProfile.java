@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
 import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceManager;
 
 /**
  * Servlet implementation class UserProfile
@@ -71,7 +72,7 @@ public class UserProfile extends HttpServlet {
 
 		HttpSession sessionScope = request.getSession();
 
-		Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope);
 		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
@@ -81,7 +82,7 @@ public class UserProfile extends HttpServlet {
 		errorStatus = false;
 
 		String email = request.getParameter(FIELD_EMAIL);	
-		User userCourant = persistance.getUserByEMail(email); 
+		User userCourant = persistance.getUserByEmail(email); 
 		
 //		errMsg = validateEmail(email);
 //		if (errMsg !=null)
