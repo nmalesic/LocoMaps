@@ -63,6 +63,7 @@ public class LocoMaps extends HttpServlet {
 
 		
 		String result = request.getParameter("result");
+		String rayon = request.getParameter("rayon");
 		String coords = request.getParameter("coords");
 		String coordslat = request.getParameter("coordslat");
 		String coordslng = request.getParameter("coordslng");
@@ -82,7 +83,7 @@ public class LocoMaps extends HttpServlet {
 			   
 			    
 			    // Recherche des voisins
-			    listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,adressOrigin.getGcoord().geometry.location, 5000);
+			    listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,adressOrigin.getGcoord().geometry.location, Integer.parseInt(rayon));
 		  }		  
 		  request.setAttribute("listUserDansRayon", listUserDansRayon);
 		

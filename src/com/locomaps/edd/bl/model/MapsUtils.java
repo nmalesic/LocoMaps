@@ -68,16 +68,18 @@ public static ArrayList<User>  chercheVoisin(HttpSession sessionScope, Location 
 	//HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
 	ArrayList<User> listUserDansRayon = new ArrayList<User>() ;
 
+
 	for(Map.Entry<String,User> user : listeUser.entrySet()){
 		
-		//user.getKey();
-		if (distance(Double.parseDouble(user.getValue().getAddress().getLocation().lat)
+		double dist = distance(Double.parseDouble(user.getValue().getAddress().getLocation().lat)
 				,Double.parseDouble(centre.lat)
 				,Double.parseDouble(user.getValue().getAddress().getLocation().lng)
 				,Double.parseDouble(centre.lng)
 				,(double)0
-				,(double)0)
-				< Rayon*1000) {
+				,(double)0);
+				
+		//user.getKey();
+		if (dist < Rayon*1000) {
 			listUserDansRayon.add(user.getValue());
 		}
 		 
