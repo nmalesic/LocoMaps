@@ -19,8 +19,8 @@
     <c:import url="/WEB-INF/menu.jsp" /></br>
   	
 	<c:import url="/WEB-INF/profil.jsp" /></br>
-<c:if test="${!empty userSession}"> 
-     	  <c:import url="/WEB-INF/UserProfile.jsp" /></br>
+<c:if test="${!empty origin}"> 
+     	  <c:import url="/WEB-INF/ListUser.jsp" /></br>
 
 
  	</c:if>	

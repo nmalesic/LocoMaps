@@ -10,7 +10,7 @@
 <label for="adresse2">Adresse :</label><input type="text" id="adresseé" name="adresse2" value="${userSession.adresse2}"><Br>
 <label for="cp">Code Postal : </label><input type="text" id="cp" name="cp" size=5 value="${userSession.CP}"><br>
 <label for="ville">Ville :</label><input type="text" id="ville" name="ville" size=15 value="${userSession.ville}"><br>
-<input class="sansLabel" type="button" value="Modifier Profil" />
+<input class="btn" type="button" value="Modifier Profil" />
 </fieldset>
 </form>
 </div>

@@ -33,7 +33,7 @@ public class MapsUtils {
 public static String composeItineraire(String origin, String destination, String waypoint){
 		
 		StringBuilder sb = new StringBuilder("");
-		sb.append("<iframe width=\"600\" height=\"450\" frameborder=\"1\" style=\"border:0px\" src=\"");
+		sb.append("<iframe width=\"600\" height=\"450\" frameborder=\"1\" style=\"border:0px;border-radius: 35px\" src=\"");
 		sb.append("https://www.google.com/maps/embed/v1/directions?origin=");
 		sb.append(origin);
 		sb.append("&destination=");
