@@ -75,10 +75,7 @@ public class LocoMaps extends HttpServlet {
 	  	// Récupération complète des info de la coordonnées
 		  if(result != null) {
 			    
-			    final GsonBuilder gsonBuilder = new GsonBuilder();
-			    final Gson gson = gsonBuilder.create();
-			    gsonCoords = gson.fromJson( result, GoogleGeoCodeResponse.class);
-			    adressOrigin = new Adresse2D(origin,gsonCoords);
+			    adressOrigin = new Adresse2D(origin,result);
 			   
 			    
 			    // Recherche des voisins

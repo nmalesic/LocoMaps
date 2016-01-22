@@ -1,5 +1,8 @@
 package com.locomaps.edd.bl.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * coordonnée latitude et longitude au format google maps
  * correspondant
@@ -29,6 +32,41 @@ public class Adresse2D {
 	// addresse google maps
 	private GoogleGeoCodeResponse gcoord;
 	
+
+	public Adresse2D(String adresse1, String adresse2, String CP, String ville, String result) {
+		super();
+		setTypeAddress2D(TypeAddress.PROFIL);
+		this.adresse1 = adresse1;
+		this.adresse2 = adresse2;
+		this.CP = CP;
+		this.ville = ville;
+		this.gcoord = this.result2GCoord(result);
+		setGeocode(gcoord != null);
+		if (isGeocode()) {
+			this.location = new Location(this.gcoord.geometry.location.lat,this.gcoord.geometry.location.lng);
+		} else {
+			this.location = new Location("","");
+		}
+			
+		this.result = result;
+		
+	}
+	
+	public Adresse2D(String addressSaisie, String result) {
+		super();
+		setTypeAddress2D(TypeAddress.RECHERCHE);
+		this.addressSaisie = addressSaisie;
+		this.gcoord = this.result2GCoord(result);
+		setGeocode(gcoord != null); 
+		if (isGeocode()) {
+			this.location = new Location(this.gcoord.geometry.location.lat,this.gcoord.geometry.location.lng);
+		} else {
+			this.location = new Location("","");
+		}
+
+	}
+
+	/*
 	public Adresse2D(String adresse1, String adresse2, String CP, String ville, GoogleGeoCodeResponse gcoord,String result) {
 		super();
 		setTypeAddress2D(TypeAddress.PROFIL);
@@ -50,7 +88,7 @@ public class Adresse2D {
 		this.gcoord = gcoord;
 		setGeocode(gcoord != null); 
 	}
-
+*/
 
 	public int getId() {
 		return id;
@@ -144,5 +182,27 @@ public class Adresse2D {
 
 	private void setGeocode(boolean geocode) {
 		this.geocode = geocode;
+	}
+	
+	public GoogleGeoCodeResponse result2GCoord(String result) {
+		// Récupération complète des info de la coordonnées
+		GoogleGeoCodeResponse gsonCoords = null;
+		if (result != null) {
+
+			final GsonBuilder gsonBuilder = new GsonBuilder();
+			final Gson gson = gsonBuilder.create();
+			gsonCoords = gson.fromJson(result, GoogleGeoCodeResponse.class);
+		}
+		return gsonCoords;
+	}
+
+	public String GCoord2result(GoogleGeoCodeResponse gsonCoords) {
+		String result = null;
+		if (gsonCoords != null) {
+			final GsonBuilder gsonBuilder = new GsonBuilder();
+			final Gson gson = gsonBuilder.create();
+			result = gson.toJson(gsonCoords, GoogleGeoCodeResponse.class);
+		}
+		return result;
 	}
 }
