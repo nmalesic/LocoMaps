@@ -9,15 +9,15 @@
 <th>Téléphone</th>
 <th>email</th>
 </tr>
-<c:forTokens var="p" items="raoul;john;nicolas;cyrille;grégoire;Sylvain;Jeanine;Robert" delims=";" varStatus="pStatus">
+<c:forEach var="p" items="${listUserDansRayon}" varStatus="pStatus">
 
 <tr class="${pStatus.index%2==0?'pair':'impair'}">
-<td>${p}</td>
-<td>TEST</td>
+<td>${p.nomUtil}</td>
+<td>${p.prenomUtil }</td>
 <td><c:choose>
   <c:when test="${!empty userSession}">
-  ${pStatus.count} rue du Test 99999 ESSAI
- </c:when>
+${p.adress}
+</c:when>
     <c:otherwise>
    <span class=> <a href="identification"> Vous devez être connecté</a></span>
   </c:otherwise>
@@ -27,7 +27,7 @@
 
 <td ><c:choose>
   <c:when test="${!empty userSession}">
-   ${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}
+  ${p.telephone}
      </c:when>
     <c:otherwise>
    <span class=> <a href="identification"> Vous devez être connecté</a></span>
@@ -38,14 +38,14 @@
 
 <td ><c:choose>
   <c:when test="${!empty userSession}">
-   ${p}.test@test${pStatus.count}.fr
+   ${p.email}
      </c:when>
     <c:otherwise>
    <span class=> <a href="identification">  Vous devez être connecté</a></span>
   </c:otherwise>
 </c:choose></td>
 </tr>
-</c:forTokens>
+</c:forEach>
 
 </table>
 </fieldset>
