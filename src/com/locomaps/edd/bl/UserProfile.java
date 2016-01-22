@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.User;
 import com.locomaps.edd.bl.model.bd.Persistance;
 import com.locomaps.edd.bl.model.bd.PersistanceManager;
@@ -227,6 +228,37 @@ public class UserProfile extends HttpServlet {
 			doGet(request, response);
 		}
 		else{
+			
+			String result = request.getParameter("result");
+//			
+//		  	//GoogleGeoCodeResponse gsonCoords = null;
+//		  	Adresse2D adressOrigin = null;
+//			  
+//		  	// Récupération complète des info de la coordonnées
+//			  if(result != null) {
+//				  adressOrigin = new Adresse2D(adr1,adr2,cp,ville,result);
+//			  } else {
+//				  //** Interdiction d'enregistré une adresse non géocodée
+//					// Enregistrer le statut de l'action
+//					actionMessage = "Echec de l'inscription";
+//					errorStatus = true;
+//					errMsg = "L'adresse n'a pas pu être géocodée";
+//					erreurs.put(FIELD_VILLE, errMsg);
+//
+//					request.setAttribute("form", form);
+//					request.setAttribute("erreurs", erreurs);
+//					request.setAttribute("actionMessage", actionMessage);
+//					request.setAttribute("errorStatus", errorStatus);
+//
+//					doGet(request, response);
+//			  }
+//			
+//			User newUser = null;
+//			//Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
+//			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
+//			
+			Adresse2D adresseAModifier = userCourant.getAddress();
+			userCourant.getAddress().setGcoord((adresseAModifier.result2GCoord(result)));
 			sessionScope.setAttribute("userSession", userCourant);
 			response.sendRedirect("accueil");
 

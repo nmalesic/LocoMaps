@@ -72,18 +72,19 @@ public class LocoMaps extends HttpServlet {
 	  	Adresse2D adressOrigin = null;
 	  	ArrayList<User> listUserDansRayon = null;
 		  
-	  	// Récupération complète des info de la coordonnées
+		HttpSession sessionScope = request.getSession();
+		User userSession = GestionSession.getUserSession(sessionScope);
+
+		// Récupération complète des info de la coordonnées
 		  if(result != null) {
 			    
 			    adressOrigin = new Adresse2D(origin,result);
 			   
 			    
 			    // Recherche des voisins
-			    //listUserDansRayon = MapsUtils.chercheVoisin(adressOrigin.getGcoord().geometry.location, 5000);
+			    //listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,adressOrigin.getGcoord().geometry.location, 5000);
 		  }		  
 		  
-		HttpSession sessionScope = request.getSession();
-		User userSession = GestionSession.getUserSession(sessionScope);
 		
 		
 		if (origin!=null){

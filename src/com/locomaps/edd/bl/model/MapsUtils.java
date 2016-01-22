@@ -1,10 +1,16 @@
 package com.locomaps.edd.bl.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import com.locomaps.edd.bl.model.User;
+import com.locomaps.edd.bl.model.bd.Persistance;
+import com.locomaps.edd.bl.model.bd.PersistanceManager;
 import com.locomaps.edd.bl.GestionSession;
 
 public class MapsUtils {
@@ -54,9 +60,26 @@ public static String composeItineraire(String origin, String destination, String
  * @param Rayon Rayon de recherche
  * @return
  */
-public static ArrayList<User> chercheVoisin(Location centre, int Rayon) {
-	ArrayList<User> listUserDansRayon = new ArrayList<User>();
+public static HashMap<String,User> chercheVoisin(HttpSession sessionScope, Location centre, int Rayon) {
+	Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope); //GestionSession.getPersitanceSession(sessionScope);
 	
+	HashMap<String,User> listeUser = persistance.listAllUser();
+	
+	for(Map.Entry<String,User> user : listeUser.entrySet()){
+		
+		//user.getKey();
+//		user.getValue().getAddress().getLocation().lat, user.getValue().getAddress().getLocation().lng; 
+		}
+
+	
+		
+//	for (User user : listeUser) {
+//		
+//		
+//	}
+
+	HashMap<String,User> listUserDansRayon = new HashMap<String,User>() ;
+			
 	// TODO Chercher les utilisateurs dont l'adresse est dans le rayon demandé
 	// On pourrait utiliser une requête de ce type pour filtrer les voisins dans un carré inscrit dans le rayon demandé
 	/*

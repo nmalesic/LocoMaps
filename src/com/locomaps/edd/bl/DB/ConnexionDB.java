@@ -157,7 +157,7 @@ public class ConnexionDB implements Persistance{
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\",\"" + user.getAddress().getLocation().lat + "\",\"" + user.getAddress().getLocation().lng + "\",\"" + user.getAddress().getTypeAddress2D().toString() + "\",\"" + user.getAddress().getResult() + "\")";
+				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\",\"" + user.getAddress().getLocation().lat + "\",\"" + user.getAddress().getLocation().lng + "\",\"" + user.getAddress().getTypeAddress2D().toString() + "\",\"" + user.getAddress().getResult().replace("\"", "'") + "\")";
 			}
 			statement.executeUpdate(rqAdr);
 		}
@@ -207,11 +207,12 @@ public class ConnexionDB implements Persistance{
 	@Override
 	public User getUserByEmail(String email)
 	{
-		User user = new User();
+		User user = null;// new User();
 		String rq = "SELECT * FROM UTILISATEUR U LEFT JOIN ADRESSE A ON U.IDUTILISATEUR = A.IDUTILISATEUR WHERE U.Email = \"" + email + "\"";
 		try 
 		{
 			ResultSet res = statement.executeQuery(rq);
+			if (res.next()) {
 			user = initUser(res);
 //			user.setId(res.getInt(1));
 //			user.setNomUtil(res.getString(2));
@@ -224,6 +225,7 @@ public class ConnexionDB implements Persistance{
 //			GoogleGeoCodeResponse gcoord = new GoogleGeoCodeResponse();
 //			Adresse2D adresse = new Adresse2D(res.getString(10),res.getString(11),res.getString(12),res.getString(13),gcoord,res.getString(14));
 //			user.setAddress(adresse);
+			} 
 		}
 		catch (SQLException e)
 		{
@@ -261,7 +263,7 @@ public class ConnexionDB implements Persistance{
 			Location location = new Location();
 			location.setLat(res.getString(16));
 			location.setLng(res.getString(17));
-			Adresse2D adresse = new Adresse2D(res.getString(12),res.getString(13),res.getString(14),res.getString(15),res.getString(19));
+			Adresse2D adresse = new Adresse2D(res.getString(12),res.getString(13),res.getString(14),res.getString(15),res.getString(19).replace("'", "\""));
 			adresse.setId(res.getInt(10));
 			user.setAddress(adresse);
 		} 
