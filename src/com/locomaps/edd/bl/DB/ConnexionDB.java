@@ -18,20 +18,20 @@ import com.locomaps.edd.bl.model.bd.Persistance;
 
 public class ConnexionDB implements Persistance{
 
-	private String chaineConnection = "jdbc:sqlite:";
+	//private String chaineConnection = "jdbc:sqlite:";
 	private static Statement statement;
 	private static Connection connection;
 	private static ConnexionDB connexionDB = null;
 	//private static String cheminBase = "C:/Users/fcoeuret/Documents/workspace-sts-3.7.0.RELEASE/LocoMaps/WebContent/DB/DB_LocoMaps.db";
-	private String cheminBase = "WebContent/DB/DB_LocoMaps.db";
+	//private String cheminBase = "WebContent/DB/DB_LocoMaps.db";
 
-	public String getChaineConnection() {
-		return chaineConnection;
-	}
-
-	public void setChaineConnection(String chaineConnection) {
-		this.chaineConnection = chaineConnection;
-	}
+//	public String getChaineConnection() {
+//		return chaineConnection;
+//	}
+//
+//	public void setChaineConnection(String chaineConnection) {
+//		this.chaineConnection = chaineConnection;
+//	}
 
 	public static Statement getStatement() {
 		return statement;
@@ -57,13 +57,13 @@ public class ConnexionDB implements Persistance{
 		ConnexionDB.connexionDB = connexionDB;
 	}
 	
-	public String getcheminBase() {
-		return cheminBase;
-	}
-
-	public void setcheminBase(String cheminBase) {
-		this.cheminBase = cheminBase;
-	}
+//	public String getcheminBase() {
+//		return cheminBase;
+//	}
+//
+//	public void setcheminBase(String cheminBase) {
+//		this.cheminBase = cheminBase;
+//	}
 
 	public ConnexionDB() {
 		// TODO Auto-generated constructor stub
@@ -157,11 +157,19 @@ public class ConnexionDB implements Persistance{
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\"," + user.getAddress().getLocation().lat + "," + user.getAddress().getLocation().lng + ",\"" + user.getAddress().getTypeAddress2D() + "\",\"" + user.getAddress().getResult() + "\")";
+				String a = user.getAddress().getAdresse1();
+				a = user.getAddress().getAdresse2();
+				a = user.getAddress().getCP();
+				a = user.getAddress().getVille();
+				a = user.getAddress().getLocation().lat;
+				a = user.getAddress().getLocation().lng;
+				a = user.getAddress().getTypeAddress2D().toString();
+				a = user.getAddress().getResult();
+				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\",\"" + user.getAddress().getLocation().lat + "\",\"" + user.getAddress().getLocation().lng + "\",\"" + user.getAddress().getTypeAddress2D().toString() + "\",\"" + user.getAddress().getResult() + "\")";
 			}
 			statement.executeUpdate(rqAdr);
 		}
-		catch (SQLException e) 
+		catch (Exception e) 
 		{
 			ok = false;
 			// TODO Auto-generated catch block
@@ -198,11 +206,13 @@ public class ConnexionDB implements Persistance{
 		}
 	}
 	
+
 	/**
 	 * Recherche User par son email
 	 * @param email
 	 * @return User
 	 */
+	@Override
 	public User getUserByEmail(String email)
 	{
 		User user = new User();
@@ -271,11 +281,6 @@ public class ConnexionDB implements Persistance{
 		return user;
 	}
 
-	@Override
-	public User getUserByEMail(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override
@@ -305,6 +310,8 @@ public class ConnexionDB implements Persistance{
 			return ok;
 		}
 	}
+
+
 
 
 	

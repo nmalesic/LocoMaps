@@ -61,7 +61,7 @@ public class Identification extends HttpServlet {
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("password");
 
-		User userSession = persistance.getUserByEMail(email); 
+		User userSession = persistance.getUserByEmail(email); 
 
 		if (userSession == null){
 			// L'utilisateur n'existe pas dans la session

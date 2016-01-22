@@ -1,6 +1,12 @@
 package com.locomaps.edd.bl.model;
 
 public class Location {
+	public Location(String lat, String lng) {
+		super();
+		this.lat = lat;
+		this.lng = lng;
+	}
+
 	public String lat;
 	public String lng;
 	

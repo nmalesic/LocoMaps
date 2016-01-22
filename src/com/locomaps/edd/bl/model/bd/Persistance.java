@@ -19,7 +19,7 @@ public interface Persistance {
 	 * @param email
 	 * @return
 	 */
-	public User getUserByEMail(String email);
+	public User getUserByEmail(String email);
 
 	/**
 	 * Ajout d'un utilisateur
