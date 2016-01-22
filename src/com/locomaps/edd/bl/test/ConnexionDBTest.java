@@ -26,7 +26,7 @@ public class ConnexionDBTest {
 	private Statement statement;
 	private TypeAddress typeAdresse;
 	private ArrayList<User> listUser;
-	private static String cheminBase = "jdbc:sqlite:WebContent/DB/DB_LocoMaps_Test.db";
+	private static String cheminBase = "jdbc:sqlite:D:/DB/DB_LocoMaps_Test.db";
 
 
 	
@@ -260,6 +260,40 @@ public class ConnexionDBTest {
 				assertUser(mapUser.get(user.getEmail()),mapUserRet.get(user.getEmail()));
 			}
 		}	
+	}
+	
+	@Test
+	public void changeUserTest()
+	{
+		initListUser();
+		connexionDB = (ConnexionDB)ConnexionDB.getInstance(cheminBase);
+		assertNotNull("Connexion", connexionDB);
+		Boolean retUser = false;
+		if (connexionDB != null)
+		{
+			deleteBase();
+			User user = new User();
+			user = listUser.get(2);
+			retUser = connexionDB.addUser(user);
+
+			User userMod = new User();
+			userMod = listUser.get(4);
+			User userRet = new User();
+			//Lecture de l'utilisateur qui vient d'être rajouté pour récupérer son id
+			userRet = connexionDB.getUserByEmail(user.getEmail());
+			//On remet l'id de l'utilisateur qui vient d'être lu dans l'utilisateur qu'on va passer modifier (afin de le lire par son id)
+			userMod.setId(userRet.getId());
+			userMod.getAddress().setId(userRet.getAddress().getId());
+			userMod.setEmail(userRet.getEmail());
+			retUser = connexionDB.change(userMod);
+			if (retUser)
+			{
+				//Relecture de l'utilisateur
+				User userMod2 = new User();
+				userMod2 = connexionDB.getUserByEmail(userMod.getEmail());
+				assertUser(userMod,userMod2);
+			}
+		}
 	}
 	
 }
