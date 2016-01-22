@@ -23,7 +23,7 @@
    ${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}-${pStatus.count}${pStatus.count}
      </c:when>
     <c:otherwise>
-   <span class=> Connectez vous</span>
+   <span class=> <a href="identification"> Vous devez être connecté</a></span>
   </c:otherwise>
 </c:choose>
 </td>
@@ -34,7 +34,7 @@
    ${p}.test@test${pStatus.count}.fr
      </c:when>
     <c:otherwise>
-   <span class=> Connectez vous</span>
+   <span class=> <a href="identification">  Vous devez être connecté</a></span>
   </c:otherwise>
 </c:choose></td>
 </tr>
