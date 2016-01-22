@@ -290,7 +290,8 @@ public class ConnexionDB implements Persistance{
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = \"" + user.getAddress().getLocation().lat + "\", LONGITUDE = \"" + user.getAddress().getLocation().lng + "\", TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D() + "\",GCOORD = \"" + user.getAddress().getResult() + "\" WHERE IDADRESSE = " + user.getAddress().getId();
+				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = \"" + user.getAddress().getLocation().lat + "\", LONGITUDE = \"" + user.getAddress().getLocation().lng + "\", TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D().toString() + "\",GCOORD = \"" + user.getAddress().getResult().replace("\"", "'") + "\" WHERE IDADRESSE = " + user.getAddress().getId();
+
 			}
 			statement.executeUpdate(rqAdr);
 		}
