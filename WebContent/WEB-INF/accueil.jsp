@@ -20,5 +20,11 @@
   	
 	<c:import url="/WEB-INF/profil.jsp" /></br>
 
+<c:if test="${!empty origin}"> 
+     	  <c:import url="/WEB-INF/ListUser.jsp" /></br>
+
+
+ 	</c:if>	
+
 </body>
 </html>

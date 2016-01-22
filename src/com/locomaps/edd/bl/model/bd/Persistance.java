@@ -19,7 +19,7 @@ public interface Persistance {
 	 * @param email
 	 * @return
 	 */
-	public User getUserByEMail(String email);
+	public User getUserByEmail(String email);
 
 	/**
 	 * Ajout d'un utilisateur
@@ -36,11 +36,6 @@ public interface Persistance {
 	 */
 	public boolean change(User user);
 	
-	/**
-	 * Initialisation de la base de données
-	 * 
-	 * @return
-	 */
-	public boolean initDB(Object chaineDeConnexion);
+
 
 }

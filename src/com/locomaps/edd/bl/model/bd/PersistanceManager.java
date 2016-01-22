@@ -2,6 +2,7 @@ package com.locomaps.edd.bl.model.bd;
 
 import javax.servlet.http.HttpSession;
 
+import com.locomaps.edd.bl.DB.ConnexionDB;
 import com.locompas.edd.bl.model.bd.session.SessionConnection;
 
 public class PersistanceManager {
@@ -11,12 +12,13 @@ public class PersistanceManager {
 		Persistance iDbConnection = null;
 		switch (providerType) {
 		case SESSION:
-			iDbConnection = new SessionConnection();
+			//iDbConnection = new SessionConnection();
 			break;
 		case SQLITE:
 			// TODO
 			// iDbConnection = new SqliteConnection();
-			iDbConnection = null;
+			iDbConnection = ConnexionDB.getInstance(PersistanceParameter.chaineDeConnexion);
+			//iDbConnection = null;
 
 			break;
 		default:
@@ -27,4 +29,12 @@ public class PersistanceManager {
 	}
 
 	
+	public static Persistance getPersitanceSession(HttpSession sessionScope) {
+		Persistance persistance = (Persistance) sessionScope.getAttribute("persistance");
+		if (persistance == null) {
+			persistance = PersistanceManager.getPersistance(PersistanceParameter.datatype);
+			sessionScope.setAttribute("persistance", persistance);
+		}
+		return persistance;
+	}
 }

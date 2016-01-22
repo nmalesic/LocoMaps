@@ -29,6 +29,7 @@ function geocodeEtEnvoie(){
 	<form method="POST" action="UserProfile" id="userprofile">
 		<fieldset>
 
+
 			<legend> Vos informations </legend>
 			<label for="nomUtil"> Nom :<span class="requis">*</span></label>
 			<input type=text id="nomUtil" 	name="nomUtil" value="${userSession.nomUtil}"></input><span class="error">${erreurs['nomUtil']}</span><br>
