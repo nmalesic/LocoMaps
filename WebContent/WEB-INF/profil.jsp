@@ -27,8 +27,10 @@ function geocodeEtEnvoie(){
 		<label for="rayon">Rayon de Recherche :</label>
 		<Select size="1" id="rayon" name="rayon"> 
 		<option value="1" name="1" selected>1</option>
-		<option value="2" name="2" >2</option>
-		<option value="3" name="3" >3</option>
+		<option value="5" name="5" >5</option>
+        <option value="10" name="10" >10</option>
+        <option value="20" name="20" >20</option>
+        <option value="30" name="30" >30</option>
 		</Select> KM<br>
         <input type='hidden' name='result' />
         <input type='hidden' name='coords' />
