@@ -260,6 +260,7 @@ public class UserProfile extends HttpServlet {
 			Adresse2D adresseAModifier = userCourant.getAddress();
 			userCourant.getAddress().setGcoord((adresseAModifier.result2GCoord(result)));
 			sessionScope.setAttribute("userSession", userCourant);
+			persistance.change(userCourant);
 			response.sendRedirect("accueil");
 
 		}
