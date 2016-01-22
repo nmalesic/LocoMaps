@@ -157,14 +157,6 @@ public class ConnexionDB implements Persistance{
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				String a = user.getAddress().getAdresse1();
-				a = user.getAddress().getAdresse2();
-				a = user.getAddress().getCP();
-				a = user.getAddress().getVille();
-				a = user.getAddress().getLocation().lat;
-				a = user.getAddress().getLocation().lng;
-				a = user.getAddress().getTypeAddress2D().toString();
-				a = user.getAddress().getResult();
 				rqAdr = "INSERT INTO ADRESSE VALUES (" + null + "," + idUser + ",\"" + user.getAddress().getAdresse1() + "\",\"" + user.getAddress().getAdresse2() + "\",\"" + user.getAddress().getCP() + "\",\"" + user.getAddress().getVille() + "\",\"" + user.getAddress().getLocation().lat + "\",\"" + user.getAddress().getLocation().lng + "\",\"" + user.getAddress().getTypeAddress2D().toString() + "\",\"" + user.getAddress().getResult() + "\")";
 			}
 			statement.executeUpdate(rqAdr);
@@ -269,6 +261,7 @@ public class ConnexionDB implements Persistance{
 			location.setLat(res.getString(16));
 			location.setLng(res.getString(17));
 			Adresse2D adresse = new Adresse2D(res.getString(12),res.getString(13),res.getString(14),res.getString(15),gcoord,res.getString(19));
+			adresse.setId(res.getInt(10));
 			adresse.setLocation(location);
 			user.setAddress(adresse);
 		} 
@@ -295,7 +288,7 @@ public class ConnexionDB implements Persistance{
 			int idUser = getIdUserByEmail(user.getEmail());
 			if (idUser != 0)
 			{
-				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = " + user.getAddress().getLocation().lat + ", LONGITUDE = " + user.getAddress().getLocation().lng + ",TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D() + "\",GCOORD = \"" + user.getAddress().getResult() + "\" WHERE IDADRESSE = " + user.getAddress().getId();
+				rqAdr = "UPDATE ADRESSE SET ADRESSE1 = \"" + user.getAddress().getAdresse1() + "\", ADRESSE2 = \"" + user.getAddress().getAdresse2() + "\", CP = \"" + user.getAddress().getCP() + "\", VILLE = \"" + user.getAddress().getVille() + "\", LATITUDE = \"" + user.getAddress().getLocation().lat + "\", LONGITUDE = \"" + user.getAddress().getLocation().lng + "\", TYPEADRESSE = \"" + user.getAddress().getTypeAddress2D() + "\",GCOORD = \"" + user.getAddress().getResult() + "\" WHERE IDADRESSE = " + user.getAddress().getId();
 			}
 			statement.executeUpdate(rqAdr);
 		}
