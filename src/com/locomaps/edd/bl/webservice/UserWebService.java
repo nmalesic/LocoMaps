@@ -20,7 +20,7 @@ import com.locomaps.edd.bl.model.Location;
 /**
  * Servlet implementation class UserWebService
  */
-@WebServlet("user/getAllUser")
+@WebServlet("/user/getAllUser")
 public class UserWebService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,12 +32,12 @@ public class UserWebService extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+//	/**
+//	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+//	 */
+//	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,21 +64,21 @@ public class UserWebService extends HttpServlet {
         Location loc;
         LocoAddress locoAddress;
 
-        a = new UserPOJO("webRABOIS","Sylvain","pion de 6","a@a.a","a","a", null, "0102030405","M","false");
+        a = new UserPOJO("LocoMapsRABOIS","Sylvain","pion de 6","a@a.a","a","a", null, "0102030405","M","false");
         loc = new Location("43.5563336","1.528394");
         locoAddress = new LocoAddress("10 Avenue de Gameville","","31650","Saint-Orens-de-Gameville",loc);
         locoAddress.setLocation(loc);
         a.setAddress(locoAddress);
         neighBours.add(a);
 
-        a = new UserPOJO("webCHAMAYOU","Olivier","objet composition detache","b@b.b","b","b", null, "0602030405","M","false");
+        a = new UserPOJO("LocoMapsCHAMAYOU","Olivier","objet composition detache","b@b.b","b","b", null, "0602030405","M","false");
         loc = new Location("43.6575","1.4853");
         locoAddress = new LocoAddress("10 Rue du Pic du Midi","","31240","L Union",loc);
         locoAddress.setLocation(loc);
         a.setAddress(locoAddress);
         neighBours.add(a);
 
-        a = new UserPOJO("webCOEURET","Fabrice","Singleton","c@c.c","c","c", null, "0702030405","M","false");
+        a = new UserPOJO("LocoMapsCOEURET","Fabrice","Singleton","c@c.c","c","c", null, "0702030405","M","false");
         loc = new Location("43.5175497","1.5057399");
         locoAddress = new LocoAddress("Place Clemence Isaure","","31320","Castanet-Tolosan",loc);
         locoAddress.setLocation(loc);
@@ -87,6 +87,8 @@ public class UserWebService extends HttpServlet {
         
         
 
+	    //response.getWriter().print(UserPOJO2JSON(a));
+	    
 	    response.getWriter().print(ListUserPOJO2JSON(neighBours));
 
 	    
@@ -118,7 +120,7 @@ public class UserWebService extends HttpServlet {
 			final Gson gson = gsonBuilder.create();
 	        Type listType = new TypeToken<ArrayList<UserPOJO>>() {
 	        }.getType();
-			result = gson.toJson(listUserPOJO, UserPOJO.class);
+			result = gson.toJson(listUserPOJO, listType);
 		}
 		return result;
 	}

@@ -1,6 +1,8 @@
 package com.locomaps.edd.bl.webservice;
 
-public class UserPOJO {
+import java.io.Serializable;
+
+public class UserPOJO implements Serializable{
 
 	private int id;
 	private String lastName;
