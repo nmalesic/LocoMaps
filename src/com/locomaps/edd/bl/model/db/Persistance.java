@@ -1,4 +1,4 @@
-package com.locomaps.edd.bl.model.bd;
+package com.locomaps.edd.bl.model.db;
 
 import com.locomaps.edd.bl.model.User;
 import java.util.ArrayList;
@@ -7,14 +7,14 @@ import java.util.HashMap;
 public interface Persistance {
 
 	/**
-	 * Lecture de tous les User en base de donnée
+	 * Lecture de tous les User en base de donnï¿½e
 	 * 
 	 * @return ArrayList<User>
 	 */
 	public HashMap<String, User> listAllUser();
 
 	/**
-	 * Lecture de l'utilisateur à partir de son email
+	 * Lecture de l'utilisateur ï¿½ partir de son email
 	 * 
 	 * @param email
 	 * @return

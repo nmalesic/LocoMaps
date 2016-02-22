@@ -16,16 +16,17 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.locomaps.edd.bl.DB.ConnexionDB;
+import com.locomaps.edd.bl.db.ConnexionDB;
 import com.locomaps.edd.bl.model.Adresse2D;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
 import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.DataProvider;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
-import com.locomaps.edd.bl.model.bd.PersistanceParameter;
+import com.locomaps.edd.bl.model.db.DataProvider;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.locomaps.edd.bl.model.db.PersistanceParameter;
+import com.locomaps.edd.bl.webservice.LocoAddress;
 
 /**
  * Servlet implementation class Register
@@ -90,6 +91,8 @@ public class Register extends HttpServlet {
 		Persistance persistance = PersistanceManager.getPersitanceSession(sessionScope);
 		
 		//Persistance persistance = GestionSession.getPersitanceSession(sessionScope);
+		
+		
 		HashMap<String,User> listeUser = persistance.listAllUser();
 		sessionScope.setAttribute("listeUser", listeUser);
 
@@ -241,22 +244,26 @@ public class Register extends HttpServlet {
 		}
 		else
 		{
-			// Création de l'utilisateur et transmission à la page jsp
+			// Crï¿½ation de l'utilisateur et transmission ï¿½ la page jsp
 			
 			String result = request.getParameter("result");
 			
 		  	//GoogleGeoCodeResponse gsonCoords = null;
 		  	Adresse2D adressOrigin = null;
+		  	LocoAddress locoAddress = null;
 			  
-		  	// Récupération complète des info de la coordonnées
+		  	// Rï¿½cupï¿½ration complï¿½te des info de la coordonnï¿½es
 			  if(result != null) {
-				  adressOrigin = new Adresse2D(adr1,adr2,cp,ville,result);
+				  // adressOrigin = new Adresse2D(adr1,adr2,cp,ville,result);
+				  GoogleGeoCodeResponse gsonCoords = MapsUtils.result2GCoord(result);
+				  
+				  locoAddress = new LocoAddress(adr1,adr2,cp,ville,gsonCoords.formatted_address,gsonCoords.geometry.location);
 			  } else {
-				  //** Interdiction d'enregistré une adresse non géocodée
+				  //** Interdiction d'enregistrï¿½ une adresse non gï¿½ocodï¿½e
 					// Enregistrer le statut de l'action
 					actionMessage = "Echec de l'inscription";
 					errorStatus = true;
-					errMsg = "L'adresse n'a pas pu être géocodée";
+					errMsg = "L'adresse n'a pas pu ï¿½tre gï¿½ocodï¿½e";
 					erreurs.put(FIELD_VILLE, errMsg);
 
 					request.setAttribute("form", form);
@@ -269,7 +276,10 @@ public class Register extends HttpServlet {
 			
 			User newUser = null;
 			//Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
-			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
+			
+			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
+			
+			newUser = new User(nomUtil,prenomUtil, pseudo, email, pwd1, pwd2, locoAddress, tel, sexe, fumeur);
 			
 			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adr1, adr2, cp, ville, tel, sexe, fumeur);
 			//newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
@@ -284,7 +294,7 @@ public class Register extends HttpServlet {
 				
 				
 				// Enregistrer le statut de l'action
-				actionMessage = "Succès de l'inscription";
+				actionMessage = "Succï¿½s de l'inscription";
 				errorStatus = false;
 				
 				request.setAttribute("errorStatus", errorStatus);
@@ -293,11 +303,11 @@ public class Register extends HttpServlet {
 				response.sendRedirect("accueil");
 				} else {
 					
-					// L'utilisateur existe déjà dans la session
+					// L'utilisateur existe dï¿½jï¿½ dans la session
 					// Enregistrer le statut de l'action
 					actionMessage = "Echec de l'inscription";
 					errorStatus = true;
-					errMsg = "L'email est déjà utilisé";
+					errMsg = "L'email est dï¿½jï¿½ utilisï¿½";
 					erreurs.put(FIELD_EMAIL, errMsg);
 
 					request.setAttribute("form", form);
@@ -310,11 +320,11 @@ public class Register extends HttpServlet {
 				
 				
 			} else {
-				// L'utilisateur existe déjà dans la session
+				// L'utilisateur existe dï¿½jï¿½ dans la session
 				// Enregistrer le statut de l'action
 				actionMessage = "Echec de l'inscription";
 				errorStatus = true;
-				errMsg = "L'email est déjà utilisé";
+				errMsg = "L'email est dï¿½jï¿½ utilisï¿½";
 				erreurs.put(FIELD_EMAIL, errMsg);
 
 				request.setAttribute("form", form);
@@ -361,7 +371,7 @@ public class Register extends HttpServlet {
 		{
 			if (pwd1.length() < 6)
 			{
-				err = "Le mot de passe doit contenir au minimum 8 caractères";
+				err = "Le mot de passe doit contenir au minimum 8 caractï¿½res";
 			}
 			
 			
@@ -385,7 +395,7 @@ public class Register extends HttpServlet {
 					err = "Le nom d'utilisateur est obligatoire";
 					break;
 				case 2:
-					err = "Le prénom est obligatoire";
+					err = "Le prï¿½nom est obligatoire";
 					break;
 				case 3:
 					err = "Le pseudo est obligatoire";
@@ -402,7 +412,7 @@ public class Register extends HttpServlet {
 					{
 						if (name.matches("([0-9])"))
 						{
-							err = "Le code postal doit être numérique";
+							err = "Le code postal doit ï¿½tre numï¿½rique";
 						}
 					}
 					break;
@@ -424,7 +434,7 @@ public class Register extends HttpServlet {
 
 			if ( !tel.matches( "^(0|\\+33)[1-9][0-9]{8}$"))
 			{
-				err = "Veuillez saisir un numéro de téléphone valide";
+				err = "Veuillez saisir un numï¿½ro de tï¿½lï¿½phone valide";
 			}
 		}
 		

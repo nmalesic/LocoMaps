@@ -6,9 +6,9 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
-import com.locomaps.edd.bl.model.bd.PersistanceParameter;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.locomaps.edd.bl.model.db.PersistanceParameter;
 
 public class SessionConnection { //implements Persistance{
 

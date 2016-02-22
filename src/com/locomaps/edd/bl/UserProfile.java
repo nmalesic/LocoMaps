@@ -14,9 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.Adresse2D;
+import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
+import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.locomaps.edd.bl.webservice.LocoAddress;
 
 /**
  * Servlet implementation class UserProfile
@@ -110,8 +113,8 @@ public class UserProfile extends HttpServlet {
 		}
 		else
 		{
-			if (! userCourant.getNomUtil().equals(nomUtil)){
-				userCourant.setNomUtil(nomUtil);
+			if (! userCourant.getLastName().equals(nomUtil)){
+				userCourant.setLastName(nomUtil);
 			}
 		}
 
@@ -125,8 +128,8 @@ public class UserProfile extends HttpServlet {
 		}
 		else
 		{
-			if (! userCourant.getPrenomUtil().equals(prenomUtil)){
-				userCourant.setPrenomUtil(prenomUtil);
+			if (! userCourant.getFirstName().equals(prenomUtil)){
+				userCourant.setFirstName(prenomUtil);
 			}
 		}
 
@@ -156,13 +159,13 @@ public class UserProfile extends HttpServlet {
 		}
 		else
 		{
-			if (! userCourant.getAdresse1().equals(adr1)){
-				userCourant.setAdresse1(adr1);
+			if (! userCourant.getAdress1().equals(adr1)){
+				userCourant.setAdress1(adr1);
 			}		}
 
 		String adr2 = request.getParameter(FIELD_ADR2);
-		if (! userCourant.getAdresse2().equals(adr2)){
-			userCourant.setAdresse2(adr2);}
+		if (! userCourant.getAdress2().equals(adr2)){
+			userCourant.setAdress2(adr2);}
 
 
 		String cp = request.getParameter(FIELD_CP);
@@ -177,8 +180,8 @@ public class UserProfile extends HttpServlet {
 		}
 		else
 		{
-			if (! userCourant.getCP().equals(cp)){
-				userCourant.setCP(cp);		}
+			if (! userCourant.getCodePostal().equals(cp)){
+				userCourant.setCodePostal(cp);		}
 		}
 
 		String ville = request.getParameter(FIELD_VILLE);
@@ -191,8 +194,8 @@ public class UserProfile extends HttpServlet {
 		}
 		else
 		{
-			if (! userCourant.getVille().equals(ville)){
-				userCourant.setVille(ville);		}
+			if (! userCourant.getCity().equals(ville)){
+				userCourant.setCity(ville);		}
 		}
 
 		String tel = request.getParameter(FIELD_TEL);
@@ -210,12 +213,12 @@ public class UserProfile extends HttpServlet {
 
 
 		String sexe = request.getParameter(FIELD_SEXE);
-		if (! userCourant.getSexe().equals(sexe)){
-			userCourant.setSexe(sexe);}
+		if (! userCourant.getSex().equals(sexe)){
+			userCourant.setSex(sexe);}
 
 		String fumeur = request.getParameter(FIELD_FUMEUR);
-		if (! userCourant.getFumeur().equals(fumeur)){
-			userCourant.setFumeur(fumeur);}
+		if (! userCourant.getSmoker().equals(fumeur)){
+			userCourant.setSmoker(fumeur);}
 
 		if (errorStatus)
 		{
@@ -234,15 +237,15 @@ public class UserProfile extends HttpServlet {
 //		  	//GoogleGeoCodeResponse gsonCoords = null;
 //		  	Adresse2D adressOrigin = null;
 //			  
-//		  	// Récupération complète des info de la coordonnées
+//		  	// Rï¿½cupï¿½ration complï¿½te des info de la coordonnï¿½es
 //			  if(result != null) {
 //				  adressOrigin = new Adresse2D(adr1,adr2,cp,ville,result);
 //			  } else {
-//				  //** Interdiction d'enregistré une adresse non géocodée
+//				  //** Interdiction d'enregistrï¿½ une adresse non gï¿½ocodï¿½e
 //					// Enregistrer le statut de l'action
 //					actionMessage = "Echec de l'inscription";
 //					errorStatus = true;
-//					errMsg = "L'adresse n'a pas pu être géocodée";
+//					errMsg = "L'adresse n'a pas pu ï¿½tre gï¿½ocodï¿½e";
 //					erreurs.put(FIELD_VILLE, errMsg);
 //
 //					request.setAttribute("form", form);
@@ -257,11 +260,34 @@ public class UserProfile extends HttpServlet {
 //			//Adresse2D newAdress = new Adresse2D(adr1, adr2, cp, ville, gsonCoords, result);
 //			newUser = new User(nomUtil, prenomUtil, pseudo, email, pwd1, pwd2, adressOrigin, tel, sexe, fumeur);
 //			
-			Adresse2D adresseAModifier = userCourant.getAddress();
-			userCourant.getAddress().setGcoord((adresseAModifier.result2GCoord(result)));
-			sessionScope.setAttribute("userSession", userCourant);
-			persistance.change(userCourant);
-			response.sendRedirect("accueil");
+			//Adresse2D adresseAModifier = userCourant.getAddress();
+			//userCourant.getAddress().setGcoord((adresseAModifier.result2GCoord(result)));
+			
+			// Rï¿½cupï¿½ration complï¿½te des info de la coordonnï¿½es
+			  if(result != null) {
+				  GoogleGeoCodeResponse gsonCoords = MapsUtils.result2GCoord(result);
+				  userCourant.getAddress().setOnelineAddress(gsonCoords.formatted_address);
+				  userCourant.getAddress().setLocation(gsonCoords.geometry.location);
+				  
+					sessionScope.setAttribute("userSession", userCourant);
+					persistance.change(userCourant);
+					response.sendRedirect("accueil");
+			  } else {
+				  //** Interdiction d'enregistrï¿½ une adresse non gï¿½ocodï¿½e
+					// Enregistrer le statut de l'action
+					actionMessage = "Echec de la modification";
+					errorStatus = true;
+					errMsg = "L'adresse n'a pas pu ï¿½tre gï¿½ocodï¿½e";
+					erreurs.put(FIELD_VILLE, errMsg);
+
+					request.setAttribute("form", form);
+					request.setAttribute("erreurs", erreurs);
+					request.setAttribute("actionMessage", actionMessage);
+					request.setAttribute("errorStatus", errorStatus);
+
+					doGet(request, response);
+			  }
+				  
 
 		}
 
@@ -298,7 +324,7 @@ public class UserProfile extends HttpServlet {
 		{
 			if (pwd1.length() < 6)
 			{
-				err = "Le mot de passe doit contenir au minimum 8 caractères";
+				err = "Le mot de passe doit contenir au minimum 8 caractï¿½res";
 			}
 
 
@@ -322,7 +348,7 @@ public class UserProfile extends HttpServlet {
 				err = "Le nom d'utilisateur est obligatoire";
 				break;
 			case 2:
-				err = "Le prénom est obligatoire";
+				err = "Le prï¿½nom est obligatoire";
 				break;
 			case 3:
 				err = "Le pseudo est obligatoire";
@@ -351,7 +377,7 @@ public class UserProfile extends HttpServlet {
 
 			if ( !tel.matches( "^(0|\\+33)[1-9][0-9]{8}$"))
 			{
-				err = "Veuillez saisir un numéro de téléphone valide";
+				err = "Veuillez saisir un numï¿½ro de tï¿½lï¿½phone valide";
 			}
 		}
 

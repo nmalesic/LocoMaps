@@ -9,32 +9,34 @@ import javax.servlet.http.HttpSession;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.locomaps.edd.bl.GestionSession;
 
 public class MapsUtils {
   public static final String BL ="64+rue+jean+Rostand";
 	
 
-	public static String getOrigin (HttpSession sessionScope){
-		StringBuilder origin =new StringBuilder("");
-		User user = GestionSession.getUserSession(sessionScope);
-		System.out.println(user.getAdresse1());
-		origin.append(user.getAdresse1().replaceAll("\\s+","+"));
-		origin.append("+");
-		origin.append(user.getAdresse1().replaceAll("\\s+","+"));
-		origin.append("+");
-		origin.append(user.getCP().replaceAll("\\s+","+"));
-		origin.append("+");
-		origin.append(user.getVille().replaceAll("\\s+","+"));
-		
-		return origin.toString();
-	}
-	
-	public String getDestination(){
-				return BL;
-	}
+//	public static String getOrigin (HttpSession sessionScope){
+//		StringBuilder origin =new StringBuilder("");
+//		User user = GestionSession.getUserSession(sessionScope);
+//		System.out.println(user.getAdresse1());
+//		origin.append(user.getAdresse1().replaceAll("\\s+","+"));
+//		origin.append("+");
+//		origin.append(user.getAdresse1().replaceAll("\\s+","+"));
+//		origin.append("+");
+//		origin.append(user.getCP().replaceAll("\\s+","+"));
+//		origin.append("+");
+//		origin.append(user.getVille().replaceAll("\\s+","+"));
+//		
+//		return origin.toString();
+//	}
+//	
+//	public String getDestination(){
+//				return BL;
+//	}
 	
 public static String composeItineraire(String origin, String destination, String waypoint){
 		
@@ -55,7 +57,7 @@ public static String composeItineraire(String origin, String destination, String
 
 
 /**
- * Chercher les utilisateurs dont l'adresse est dans le rayon demandé
+ * Chercher les utilisateurs dont l'adresse est dans le rayon demandï¿½
  * @param centre centre du cercle de recherche
  * @param Rayon Rayon de recherche
  * @return
@@ -93,8 +95,8 @@ public static ArrayList<User>  chercheVoisin(HttpSession sessionScope, Location 
 //	}
 
 			
-	// TODO Chercher les utilisateurs dont l'adresse est dans le rayon demandé
-	// On pourrait utiliser une requête de ce type pour filtrer les voisins dans un carré inscrit dans le rayon demandé
+	// TODO Chercher les utilisateurs dont l'adresse est dans le rayon demandï¿½
+	// On pourrait utiliser une requï¿½te de ce type pour filtrer les voisins dans un carrï¿½ inscrit dans le rayon demandï¿½
 	/*
 
 select formatted_address, place_id
@@ -103,9 +105,9 @@ where address.lat between X1 and X2
 and address.Lng between y1 and y2
 
 	 */
-	// Puis utiliser une méthode java pour calculer la distance et filtrer uniquement les coordonnées inscrites dans le cercle
+	// Puis utiliser une mï¿½thode java pour calculer la distance et filtrer uniquement les coordonnï¿½es inscrites dans le cercle
 	/*
-	 * Parcourir les coordonnées lues pour calculer les distances en elles et le centre du cercle
+	 * Parcourir les coordonnï¿½es lues pour calculer les distances en elles et le centre du cercle
 	 * distance(lat1,lat2,lng1,lng2,0,0)
 	 */
 	
@@ -143,41 +145,63 @@ public static double distance(double lat1, double lat2, double lon1,
 }
 
 /**
- * Enregistre en base de donnée la coordonnée associée à l'adresse
+ * Enregistre en base de donnï¿½e la coordonnï¿½e associï¿½e ï¿½ l'adresse
  * @param address
  * @return
  */
 public static boolean StockCoord(Adresse2D address){
 	boolean result = false;
 	
-	// TODO Enregistre en base de donnée la coordonnée associée à l'adresse
+	// TODO Enregistre en base de donnï¿½e la coordonnï¿½e associï¿½e ï¿½ l'adresse
 	
 	return result;
 }
 
 /**
- * Renvoie la liste de toutes les coordonnées
+ * Renvoie la liste de toutes les coordonnï¿½es
  * @return
  */
 public static ArrayList<Adresse2D> listAllCoord() {
 	ArrayList<Adresse2D> address = new ArrayList<Adresse2D>();
 	
-	// TODO Renvoie la liste de toutes les coordonnées
+	// TODO Renvoie la liste de toutes les coordonnï¿½es
 	
 	return address;
 }
 
 
 /**
- * Lecture de tous les User en base de donnée
+ * Lecture de tous les User en base de donnï¿½e
  * @return
  */
 public static ArrayList<User> listAllUser() {
 	ArrayList<User> listUser = new ArrayList<User>();
 	
-	// TODO Lecture de tous les User en base de donnée
+	// TODO Lecture de tous les User en base de donnï¿½e
 	
 	return listUser;
+}
+
+public static GoogleGeoCodeResponse result2GCoord(String result) {
+	// Rï¿½cupï¿½ration complï¿½te des info de la coordonnï¿½es
+	GoogleGeoCodeResponse gsonCoords = null;
+	if (result != null) {
+
+		final GsonBuilder gsonBuilder = new GsonBuilder();
+		final Gson gson = gsonBuilder.create();
+		gsonCoords = gson.fromJson(result, GoogleGeoCodeResponse.class);
+	}
+	return gsonCoords;
+}
+
+public static String GCoord2result(GoogleGeoCodeResponse gsonCoords) {
+	String result = null;
+	if (gsonCoords != null) {
+		final GsonBuilder gsonBuilder = new GsonBuilder();
+		final Gson gson = gsonBuilder.create();
+		result = gson.toJson(gsonCoords, GoogleGeoCodeResponse.class);
+	}
+	return result;
 }
 
 }

@@ -37,6 +37,17 @@ public class LocoAddress {
 
     }
 
+    public LocoAddress(String adresse1, String adresse2, String codePostal, String city, String onelineAddress, Location location) {
+        super();
+        this.address1 = adresse1;
+        this.address2 = adresse2;
+        this.codePostal = codePostal;
+        this.city = city;
+        this.setOnelineAddress(onelineAddress);
+        this.location = location;
+
+    }
+
     public LocoAddress(String onelineAddress, Location location) {
         super();
         this.setOnelineAddress(onelineAddress);

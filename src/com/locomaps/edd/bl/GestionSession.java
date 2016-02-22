@@ -5,14 +5,14 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
-import com.locomaps.edd.bl.model.bd.PersistanceParameter;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.locomaps.edd.bl.model.db.PersistanceParameter;
 
 public class GestionSession {
 
 //	/**
-//	 * Récupère l'objet persistence stocké dans la session et le crée à la première utilisation
+//	 * Rï¿½cupï¿½re l'objet persistence stockï¿½ dans la session et le crï¿½e ï¿½ la premiï¿½re utilisation
 //	 * @param sessionScope
 //	 * @return
 //	 */
@@ -27,7 +27,7 @@ public class GestionSession {
 //	}
 
 	/**
-	 * Retourne l'utilisateur en cours s'il est connecté Retourne null sinon
+	 * Retourne l'utilisateur en cours s'il est connectï¿½ Retourne null sinon
 	 * 
 	 * Exemple d'utilisation :
 	 * 

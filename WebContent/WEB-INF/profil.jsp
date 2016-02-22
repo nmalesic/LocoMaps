@@ -16,8 +16,8 @@ function geocodeEtEnvoie(){
 		<fieldset>
 		<legend> Itineraire </legend>
 		<c:if test="${!empty origin}"> <c:set var="adresse" scope="session" value="${origin}"/></c:if>
-		<c:if test="${!empty userSession.adresse1}">
-		<c:set var="adresse" scope="session" value="${userSession.adresse1} ${userSession.adresse2} ${userSession.CP} ${userSession.ville}"/></c:if>
+		<c:if test="${!empty userSession.getAdress1()}">
+		<c:set var="adresse" scope="session" value="${userSession.getAdress1()} ${userSession.getAdress2()} ${userSession.getCodePostal()} ${userSession.getCity()}"/></c:if>
 		
 		<label for="origin">Départ :</label><input type="text" id="origin" name="origin" value="<c:out value="${adresse}"/>" placeholder="Votre Adresse de départ" ><Br>
 		<label for="destination">Destination :</label><input type="text" id="destination" name="destination" value=" *BERGER-LEVRAULT* " disabled><Br>

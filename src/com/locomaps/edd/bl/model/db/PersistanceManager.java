@@ -1,8 +1,9 @@
-package com.locomaps.edd.bl.model.bd;
+package com.locomaps.edd.bl.model.db;
 
 import javax.servlet.http.HttpSession;
 
-import com.locomaps.edd.bl.DB.ConnexionDB;
+import com.locomaps.edd.bl.db.ConnexionDB;
+import com.locomaps.edd.bl.db.mysql.MySqlDAO;
 import com.locompas.edd.bl.model.bd.session.SessionConnection;
 
 public class PersistanceManager {
@@ -15,10 +16,14 @@ public class PersistanceManager {
 			//iDbConnection = new SessionConnection();
 			break;
 		case SQLITE:
-			// TODO
-			// iDbConnection = new SqliteConnection();
-			iDbConnection = ConnexionDB.getInstance(PersistanceParameter.chaineDeConnexion);
-			//iDbConnection = null;
+
+			//iDbConnection = ConnexionDB.getInstance(PersistanceParameter.chaineDeConnexion);
+
+
+			break;
+		case MYSQL:
+			iDbConnection = MySqlDAO.getInstance(PersistanceParameter.chaineDeConnexion,PersistanceParameter.username,PersistanceParameter.password);
+
 
 			break;
 		default:

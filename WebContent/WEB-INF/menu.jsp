@@ -3,7 +3,7 @@
 
 <fieldset>
 	<c:if test="${!empty userSession}">    
-    Vous etes connecté en tant que <i><b> ${userSession.pseudo}</b></i>.<br>
+    Vous etes connecté en tant que <i><b> ${userSession.getPseudo()}</b></i>.<br>
     Cliquer <a href="UserProfile"> ICI</a> pour modifier vos informations
     
     </c:if>

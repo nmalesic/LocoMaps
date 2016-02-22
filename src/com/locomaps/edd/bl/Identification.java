@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.locomaps.edd.bl.model.User;
-import com.locomaps.edd.bl.model.bd.DataProvider;
-import com.locomaps.edd.bl.model.bd.Persistance;
-import com.locomaps.edd.bl.model.bd.PersistanceManager;
-import com.locomaps.edd.bl.model.bd.PersistanceParameter;
+import com.locomaps.edd.bl.model.db.DataProvider;
+import com.locomaps.edd.bl.model.db.Persistance;
+import com.locomaps.edd.bl.model.db.PersistanceManager;
+import com.locomaps.edd.bl.model.db.PersistanceParameter;
 
 /**
  * Servlet implementation class Identification

@@ -12,11 +12,11 @@
 <c:forEach var="p" items="${listUserDansRayon}" varStatus="pStatus">
 
 <tr class="${pStatus.index%2==0?'pair':'impair'}">
-<td>${p.nomUtil}</td>
-<td>${p.prenomUtil }</td>
+<td>${p.getLastName()}</td>
+<td>${p.getFirstName() }</td>
 <td><c:choose>
   <c:when test="${!empty userSession}">
-${p.address.getAdresse1()} ${p.address.getAdresse2()} ${p.address.getCP()} ${p.address.getVille()}
+${p.address.getAddress1()} ${p.address.getAddress2()} ${p.address.getCodePostal()} ${p.address.getCity()}
 </c:when>
     <c:otherwise>
    <span class=> <a href="identification"> Vous devez être connecté</a></span>
@@ -27,7 +27,7 @@ ${p.address.getAdresse1()} ${p.address.getAdresse2()} ${p.address.getCP()} ${p.a
 
 <td ><c:choose>
   <c:when test="${!empty userSession}">
-  ${p.telephone}
+  ${p.getTelephone()}
      </c:when>
     <c:otherwise>
    <span class=> <a href="identification"> Vous devez être connecté</a></span>
@@ -38,7 +38,7 @@ ${p.address.getAdresse1()} ${p.address.getAdresse2()} ${p.address.getCP()} ${p.a
 
 <td ><c:choose>
   <c:when test="${!empty userSession}">
-   ${p.email}
+   ${p.getEmail()}
      </c:when>
     <c:otherwise>
    <span class=> <a href="identification">  Vous devez être connecté</a></span>
