@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Votre Profil</title>
 <link rel="stylesheet" type="text/css" href="register.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -34,7 +34,7 @@ function geocodeEtEnvoie(){
 			<label for="nomUtil"> Nom :<span class="requis">*</span></label>
 			<input type=text id="nomUtil" 	name="nomUtil" value="${userSession.getLastName()}"></input><span class="error">${erreurs['nomUtil']}</span><br>
 			
-			<label name="lblPrenomUtil">Prénom :<span class="requis">*</span></label>
+			<label name="lblPrenomUtil">PrÃ©nom :<span class="requis">*</span></label>
             <input name="prenomUtil" value="${userSession.getFirstName()}"></input><span class="error">${erreurs['prenomUtil']}</span></br>
             
             <label name="lblPseudo">Pseudo :<span class="requis">*</span></label>
@@ -54,12 +54,12 @@ function geocodeEtEnvoie(){
                     <input name="CP" class="CP" value="${userSession.getCodePostal()}"></input><span class="error">${erreurs['CP']}</span>
                     <input name="ville" class="ville" value="${userSession.getCity()}"></input><span class="error">${erreurs['ville']}</span></br><br><br>
 			
-			<label for="telephone">N° téléphone :</label>
+			<label for="telephone">NÂ° tÃ©lÃ©phone :</label>
 			<input type="text" id="telephone"  name="telephone" size=15 value="${userSession.getTelephone()}"><span class="error">${erreurs['telephone']}</span><br>
 			
             <label name="lblSexe">Sexe :</label>
                     <Select name="sexe" size="1" ></br>
-                        <option value='Féminin' <c:if test="${userSession.getSex() == 'Féminin'}">selected="selected"</c:if>>Féminin</option>
+                        <option value='FÃ©minin' <c:if test="${userSession.getSex() == 'FÃ©minin'}">selected="selected"</c:if>>FÃ©minin</option>
                         <option value='Masculin' <c:if test="${userSession.getSex() == 'Masculin'}">selected="selected"</c:if>>Masculin</option>
                     </Select><br>			
 			

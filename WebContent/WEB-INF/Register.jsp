@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" type="text/css" href="register.css"/>
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Formulaire d'inscription</title>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="script/geocode.js"></script>
@@ -29,7 +29,7 @@ function geocodeEtEnvoie(){
 			<form method="POST" action="Register" name="f" id="itineraire">
                     <label name="lblNomUtil">Nom :<span class="requis">*</span></label>
                     <input name="nomUtil" value="${form['nomUtil']}"></input><span class="error">${erreurs['nomUtil']}</span></br>
-                    <label name="lblPrenomUtil">Prénom :<span class="requis">*</span></label>
+                    <label name="lblPrenomUtil">PrÃ©nom :<span class="requis">*</span></label>
                     <input name="prenomUtil" value="${form['prenomUtil']}"></input><span class="error">${erreurs['prenomUtil']}</span></br>
                     <label name="lblPseudo">Pseudo :<span class="requis">*</span></label>
                     <input name="pseudo" value="${form['pseudo']}"></input><span class="error">${erreurs['pseudo']}</span></br>
@@ -45,11 +45,11 @@ function geocodeEtEnvoie(){
                     <label name="lblCPVille">Code postal - Ville :<span class="requis">*</span></label>
                     <input name="CP" class="CP" value="${form['CP']}"></input><span class="error">${erreurs['CP']}</span>
                     <input name="ville" class="ville" value="${form['ville']}"></input><span class="error">${erreurs['ville']}</span></br>
-                    <label name="lblTelephone">N° téléphone :</label>
+                    <label name="lblTelephone">NÂ° tÃ©lÃ©phone :</label>
                     <input name="telephone" value="${form['telephone']}"></input><span class="error">${erreurs['telephone']}</span></br>
                     <label name="lblSexe">Sexe :</label>
                     <Select name="sexe" size="1" value="${form['sexe']}"></input><span class="error">${erreurs['sexe']}</span></br>
-                        <Option>Féminin
+                        <Option>FÃ©minin
                         <Option>Masculin
                     </Select><br>
                     <label name="lblFumeur">Fumeur :</label>
@@ -65,7 +65,7 @@ function geocodeEtEnvoie(){
 
                     <input type="button" class="btn" value="Enregistrer" onclick="geocodeEtEnvoie()"/>
 
-			        <input type="reset" class="btn" name="annuler" value="Rafraîchir"/>
+			        <input type="reset" class="btn" name="annuler" value="RafraÃ®chir"/>
 
 			    <p>
 			</form>

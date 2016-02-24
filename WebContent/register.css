@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
 body, p, legend, label, input 
 {
@@ -124,8 +124,8 @@ a.info_bulle span
     width:1px;  
     height:1px;  
     overflow:hidden;  
-    background:#DDEEFF; /* Définition du fond, sinon on a le même que notre lien */ 
-    border:1px solid #6699FF; /* Définition des bordures */ 
+    background:#DDEEFF; /* DÃ©finition du fond, sinon on a le mÃªme que notre lien */ 
+    border:1px solid #6699FF; /* DÃ©finition des bordures */ 
 }
 
 /* Status */

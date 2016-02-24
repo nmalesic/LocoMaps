@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.locomaps.edd.bl.GestionSession;
 import com.locomaps.edd.bl.model.GoogleGeoCodeResponse;
 import com.locomaps.edd.bl.model.Location;
+import com.locomaps.edd.bl.model.MapsUtils;
 import com.locomaps.edd.bl.model.User;
 import com.locomaps.edd.bl.model.db.Persistance;
 import com.locomaps.edd.bl.model.db.PersistanceManager;
@@ -27,7 +29,7 @@ import com.locomaps.edd.bl.model.db.PersistanceManager;
 /**
  * Servlet implementation class UserWebService
  */
-@WebServlet("/user/getAllUser")
+@WebServlet("/user")
 public class UserWebService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -63,19 +65,51 @@ public class UserWebService extends HttpServlet {
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 
-	    String paramName;
-	    
-	    paramName = "user";
-        String paramUserValue = request.getParameter(paramName);
+        String paramUserValue = request.getParameter("getNeighbours");
+        String paramLatValue = request.getParameter("lat");
+        String paramLngValue = request.getParameter("lng");
+        String paramRadiusValue = request.getParameter("radius");
 
-	    paramName = "alluser";
-        String paramAllUserValue = request.getParameter(paramName);
+        String paramConnectUserValue = request.getParameter("connectuser");
+        String paramConnectPwdValue = request.getParameter("pwd");
+
+        String paramAllUserValue = request.getParameter("alluser");
         
-        ArrayList<User> neighBours = new ArrayList<User>();
-		HashMap<String,User> listeUser = persistance.listAllUser();
-		for (Entry<String,User> u : listeUser.entrySet()) {
-			neighBours.add(u.getValue());
-		}
+        if (paramAllUserValue != null) {
+            ArrayList<User> neighBours = new ArrayList<User>();
+    		HashMap<String,User> listeUser = persistance.listAllUser();
+    		for (Entry<String,User> u : listeUser.entrySet()) {
+    			neighBours.add(securityUser(u.getValue()));
+    		}
+    	    response.getWriter().print(ListUserPOJO2JSON(neighBours));
+
+        } else if (paramConnectUserValue != null && paramConnectPwdValue != null) {
+        	User user = persistance.getUserByEmail(paramConnectUserValue);
+        	String pass = user.getPassword();
+			if (paramConnectPwdValue.equals(pass)){
+				user = securityUser(user);
+	    	    response.getWriter().print(UserPOJO2JSON(user));
+			} else {
+				response.getWriter().print("{}");
+			}
+
+        } else if (paramUserValue != null && paramLatValue != null && paramLngValue != null) {
+        	
+		    // Recherche des voisins
+        	ArrayList<User> listUserDansRayon = new ArrayList<User>() ;
+        	Location location = new Location(paramLatValue, paramLngValue);
+        	String rayon = paramRadiusValue!=null?paramRadiusValue:"5";
+		    listUserDansRayon = MapsUtils.chercheVoisin(sessionScope,location, Integer.parseInt(rayon));
+		    for (User user : listUserDansRayon) {
+		    	securityUser(user);
+			}
+
+        	//User user = securityUser((persistance.getUserByEmail(paramUserValue)));
+    	    response.getWriter().print(ListUserPOJO2JSON(listUserDansRayon));
+
+        }
+        
+
 
 //        UserPOJO a;
 //        Location loc;
@@ -106,7 +140,7 @@ public class UserWebService extends HttpServlet {
 
 	    //response.getWriter().print(UserPOJO2JSON(a));
 	    
-	    response.getWriter().print(ListUserPOJO2JSON(neighBours));
+//	    response.getWriter().print(ListUserPOJO2JSON(neighBours));
 
 	    
 	}
@@ -140,6 +174,11 @@ public class UserWebService extends HttpServlet {
 			result = gson.toJson(listUser, listType);
 		}
 		return result;
+	}
+	
+	private User securityUser(User user) {
+		user.setPassword("");
+		return user;
 	}
 
 }

@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Votre Profil</title>
 </head>
 <link rel="stylesheet" type="text/css" href="register.css">
@@ -13,7 +13,7 @@
 <fieldset>
 <legend> Utilisateur</legend>
 <label for="name"> Nom :</label><input type=text id="name" name="name"><br>
-<label for="firstname"> Prénom : </label><input type=text id="firstname" name="firstname">
+<label for="firstname"> PrÃ©nom : </label><input type=text id="firstname" name="firstname">
 <br>
 <br>
 <label for="adresse">Adresse:</label><input type="text" id="adresse" name="adresse" placeholder="ex:64,rue jean rostand"> <Br>
